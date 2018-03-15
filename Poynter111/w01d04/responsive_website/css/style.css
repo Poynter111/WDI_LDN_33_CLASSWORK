@@ -122,6 +122,9 @@ main .column p {
   header .subnav li:nth-child(1) a::before{
     content: '\2630'
   }
+  header .subnav li{
+    display: none;
+  }
   header{
     width: 100%;
   }
