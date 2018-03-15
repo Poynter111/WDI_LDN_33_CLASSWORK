@@ -1,0 +1,88 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.4;
+}
+header {
+  height: 600px;
+  background-image: url('../images/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+header h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 45px;
+  font-weight: bold;
+  color: #fff;
+}
+header h1:after {
+  content: "";
+  height: 8px;
+  background-color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+main {
+  max-width: 960px;
+  margin: 30px auto;
+  padding: 0 30px;
+  /* background-color: lightgrey; */
+  overflow: hidden;
+}
+main .gallery {
+  width: 50%;
+  float: left;
+  /* background-color: pink; */
+}
+
+main .intro {
+  width: 50%;
+  float: right;
+  padding-left: 30px;
+  /* background-color: blue; */
+}
+img {
+  max-width: 100%;
+}
+main .gallery img {
+  width: 33.33%;
+  float: left;
+}
+main .intro h2 {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+footer {
+  background-color: #3c3c3c;
+  padding: 20px;
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+}
+@media only screen and (max-width: 960px) {
+  main .gallery,
+  main .intro {
+    width: 100%;
+  }
+
+  main .intro {
+    margin-top: 30px;
+    padding: 0;
+  }
+}
+@media only screen and (max-width: 640px) {
+  main .gallery img {
+    width: 50%;
+  }
+}
