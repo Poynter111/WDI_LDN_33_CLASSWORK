@@ -1,0 +1,19 @@
+@mixin text-styling (){
+  margin: 0;
+  padding: 0;
+}
+
+@mixin centered (){
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  transform: translate(-50%,-50%);
+}
+
+@mixin box-shadow($params) {
+  -webkit-box-shadow: $params;
+  -moz-box-shadow: $params;
+  box-shadow: $params;
+
+}

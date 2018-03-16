@@ -1,0 +1,17 @@
+//Helpers
+@import "helpers/variables";
+@import "helpers/mixins";
+@import "helpers/classes";
+
+
+//partials
+@import "partials/base";
+@import "partials/lists";
+@import "partials/buttons";
+@import "partials/typography";
+//components
+@import "components/headers";
+@import "components/home";
+@import "components/about";
+@import "components/contact";
+@import "components/footer";

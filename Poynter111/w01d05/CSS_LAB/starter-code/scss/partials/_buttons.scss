@@ -1,0 +1,22 @@
+button {
+  font-family: 'Lato', sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  background: none;
+  color: #333;
+  border-radius: 3px;
+  font-weight: 400;
+  padding: 8px 50px;
+  margin: 15px;
+  cursor: pointer;
+  transition: box-shadow 2s;
+  &.submit {
+    border: 2px solid #378B2E;
+  }
+  &.default {
+    border: 2px solid #ccc;
+  }
+  &:hover {
+    @include box-shadow($shadows);
+  }
+}

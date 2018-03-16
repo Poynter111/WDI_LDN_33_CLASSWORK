@@ -1,0 +1,23 @@
+section.home {
+  height: 750px;
+  background: url(http://3.bp.blogspot.com/-xQ50cuaGanI/VSyfX1Bn2WI/AAAAAAABJDk/I8hDcQ_bvSw/s1600/unsplash-guyonwall.jpg) no-repeat center center fixed;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: inherit;
+    background: rgba(0, 0, 0, 0.45);
+  }
+  h1 {
+    @include text-styling;
+    color: #fff;
+    font-weight: 400;
+  }
+  h2 {
+    @include text-styling;
+    color: #f5f5f5;
+    font-weight: 300;
+  }
+}

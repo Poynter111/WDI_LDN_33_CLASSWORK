@@ -1,0 +1,24 @@
+body {
+  margin: 0 auto;
+  font-family: 'Lato', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #333;
+  letter-spacing: -1px;
+  width: 1200px;
+}
+
+main {
+  margin: 0 auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+section {
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+  height: 600px;
+}

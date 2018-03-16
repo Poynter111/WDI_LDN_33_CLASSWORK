@@ -1,0 +1,33 @@
+.about {
+  border-top: 5px solid #f5f5f5;
+  aside, div {
+    padding: 25px;
+  }
+  aside {
+    padding: 35px;
+    height: inherit;
+    width: 50%;
+    float: left;
+    background: #fafafa;
+    text-align: left;
+    h3 {
+      @include text-styling;
+      font-size: 35px;
+      font-weight: 400;
+    }
+    p {
+      @include text-styling;
+      margin: 10px 0;
+      font-size: 18px;
+      line-height: 30px;
+      font-weight: 300;
+      text-align: justify;
+    }
+  }
+  div {
+    height: inherit;
+    width: 50%;
+    float: right;
+    background: #fafafa;
+  }
+}
