@@ -1,0 +1,94 @@
+/* This is a comment */
+
+h3{
+  color: pink;
+}
+h4 {
+  color: red;
+}
+main{
+  border: 2px dashed blue;
+  margin: auto 0;
+  text-align: center;
+}
+li{
+  list-style-type: none;
+}
+div{
+  padding: 30px;
+}
+.main-content-wrap{
+  background-color: rgba(255, 0, 0, 0.3);
+  font-size: 30px;
+  color: grey;
+}
+.txt-content, .main-content-wrap{
+  font-weight: 500;
+  color: orange;
+}
+.images{
+  width: 100%;
+  /* height: 500px; */
+}
+.mam{
+  text-decoration: underline;
+}
+.fish{
+  font-weight: bold;
+
+}
+.bird{
+  font-style: italic;
+}
+#mouse{
+  color: grey;
+}
+#goldfish{
+  color: gold;
+}
+#sheep{
+  color: steelblue;
+}
+/* Support characters that i can play */
+.character{
+  color: blue;
+}
+.best{
+  color: blue;
+}
+/* #range{
+  color: green;
+} */
+/* li.character{
+  color: orange;
+} */
+ul li {
+  text-align: center;
+}
+/* Top Champs */
+/* Any children */
+div p {
+  color: purple;
+}
+/* Only grandchildren */
+div * p{
+  color: teal;
+}
+/* Only direct children */
+div > p{
+  color: red;
+}
+/* direct sibling */
+div + p{
+  color: green;
+}
+/* any sibling */
+/* div ~ p{
+  color: orange;
+} */
+.character:hover{
+  color: red;
+}
+.character::first-letter{
+  font-size: 50px;
+}
