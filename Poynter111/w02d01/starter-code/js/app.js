@@ -1,10 +1,15 @@
 // Color converter
 let hex = prompt("Please enter a HEX code in the format RRGGBB")
 
+for(let i = 0; i< hex.length; i++){
+  console.log(index, hex[i])
+  if(i < 2){
+    red += hex[i];
+  }
+}
 
 
-
-
+parseInt()
 // var rgbToHex = function (rgb) {
 //   var hex = Number(rgb).toString(16);
 //   if (hex.length < 2) { hex = "0" + hex;
