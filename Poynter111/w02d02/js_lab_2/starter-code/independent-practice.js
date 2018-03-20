@@ -67,3 +67,30 @@ function wordReverse(word){
   return word.split(' ').reverse().join(' ');
 }
 console.log(.reverse("hello"));
+//-------------------------------------------------------------------------------
+
+function fizzBuzz(){
+  for (let x = 1; x <= 101; x++){
+    switch{
+      case x % 3 ===0 && x%3 ===0:
+        console.log('fizz');
+        break;
+      case x % 3 ===0:
+        console.log('fizz');
+        break;
+      case x % 5 ===0
+        console.log('fizzbuzz');
+        break;
+    }
+    let v;
+    if(x % 3 ===0 && x%3 ===0){
+      console.log('fizz');
+    }else if(x % 3 ===0){
+      console.log('buzz');
+    }else if(x % 5 ===0){
+      console.log('fizzbuzz');
+    }else {
+      console.log(x);
+    }
+  }
+}
