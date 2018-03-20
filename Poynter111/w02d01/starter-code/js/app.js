@@ -1,32 +1,12 @@
-// Color converter
-let hex = prompt("Please enter a HEX code in the format RRGGBB")
 
-for(let i = 0; i< hex.length; i++){
-  console.log(index, hex[i])
-  if(i < 2){
-    red += hex[i];
+for( var i = 1; i <= 101; i++ ) {
+  if (i%3 === 0 && i%5 !== 0) {
+    console.log('Fizz');
+  } else if (i%5 === 0 && i%3 !== 0) {
+    console.log('Buzz');
+  } else if (i%5 === 0 && !i%3 === 0) {
+    console.log('FizzBuzz');
+  } else {
+    console.log(i);
   }
 }
-
-
-parseInt()
-// var rgbToHex = function (rgb) {
-//   var hex = Number(rgb).toString(16);
-//   if (hex.length < 2) { hex = "0" + hex;
-//   }
-//   return hex;
-// };
-//
-// var fullColorHex = function(r,g,b) {
-//   var red = rgbToHex(r);
-//   var green = rgbToHex(g);
-//   var blue = rgbToHex(b);
-//   return red+green+blue;
-// };
-// FizzBuzz
-
-// Guess the number
-
-// Password strength checker
-
-// Mastermind
