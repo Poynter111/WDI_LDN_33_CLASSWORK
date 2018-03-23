@@ -5,7 +5,8 @@ window.addEventListener('DOMContentLoaded', function(){
     playBtn[i].addEventListener('click', function() {
       const btnPressed = this.dataset.value;
       audio.src = `/sounds/${btnPressed}.wav`;
-      audio.play()
+      console.log(audio);
+      audio.play();
     });
   }
 });
