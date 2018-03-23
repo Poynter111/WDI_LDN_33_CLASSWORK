@@ -1,0 +1,13 @@
+.wrapper{
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+.board{
+  width: 500px;
+  background-color: lightgrey;
+  margin-top: 300px;
+}
+#target{
+  float: right;
+}
