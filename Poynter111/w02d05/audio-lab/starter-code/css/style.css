@@ -1,0 +1,18 @@
+.wrapper{
+  margin: 0 auto;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+}
+.button-wrap{
+  margin-top: 50px;
+}
+.row{
+  display: flex;
+  justify-content: space-around;
+  flex-basis: 100%;
+}
+button {
+  padding: 30px;
+  margin: 20px;
+}
