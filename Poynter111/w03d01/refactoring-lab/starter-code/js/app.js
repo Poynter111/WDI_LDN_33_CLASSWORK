@@ -43,16 +43,16 @@ window.addEventListener('DOMContentLoaded', () => {
   eqBtn.addEventListener('click', () => {
     switch (operator) {
       case '+':
-        document.querySelector('.display').value = firstNumber + secondNumber;
+        screen.value = firstNumber + secondNumber;
         break;
       case '-':
-        document.querySelector('.display').value = firstNumber - secondNumber;
+        screen.value = firstNumber - secondNumber;
         break;
       case '/':
-        document.querySelector('.display').value = firstNumber / secondNumber;
+        screen.value = firstNumber / secondNumber;
         break;
       case 'x':
-        document.querySelector('.display').value = firstNumber * secondNumber;
+        screen.value = firstNumber * secondNumber;
         break;
     }
   });
