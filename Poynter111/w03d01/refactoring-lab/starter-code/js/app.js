@@ -3,6 +3,11 @@ window.addEventListener('DOMContentLoaded', () => {
   let firstNumber  = '';
   let secondNumber = '';
   let operator      = '';
+  const opBtn = document.querySelectorAll('.operator');
+  const numBtn = document.querySelectorAll('.number');
+  const screen = document.querySelector('.display');
+  const eqBtn = document.querySelector('.eq');
+  const clearBtn = document.querySelector('.clear');
   const calOperators ={
     '+': +,
     '-': -
@@ -10,19 +15,17 @@ window.addEventListener('DOMContentLoaded', () => {
     '/': /
   }
 
-function operatorGen(num1, operUsed, num2){
-  
 
-    document.querySelectorAll('.operator').forEach(operatorBtn => {
+    opBtn.forEach(operatorBtn => {
       operatorBtn.addEventListener('click', (e) => {
         operator = e.target.value;
       });
     });
 
-}
 
 
-  document.querySelectorAll('.number').forEach(numberBtn => {
+
+  numBtn.forEach(numberBtn => {
     numberBtn.addEventListener('click', (e) => {
       const value = e.target.value;
       document.querySelector('.display').value = value;
@@ -37,7 +40,7 @@ function operatorGen(num1, operUsed, num2){
 
 
 
-  document.querySelector('.eq').addEventListener('click', () => {
+  eqBtn.addEventListener('click', () => {
     switch (operator) {
       case '+':
         document.querySelector('.display').value = firstNumber + secondNumber;
@@ -54,7 +57,7 @@ function operatorGen(num1, operUsed, num2){
     }
   });
 
-  document.querySelector('.clear').addEventListener('click', () => {
+  clearBtn.addEventListener('click', () => {
     firstNumber = '';
     secondNumber = '';
     operator = '';
