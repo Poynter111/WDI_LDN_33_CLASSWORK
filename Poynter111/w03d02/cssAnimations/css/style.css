@@ -1,0 +1,25 @@
+#ball{
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  background-color: #DB3340;
+  animation-name: bounce;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(1,1.79,0,-0.98)
+  animation: bounce2 2s linear, moveLeft 10s linear infinite;
+}
+
+@keyframes bounce {
+  0%{
+    bottom: 100%;
+  }
+  50%{
+    bottom: 0;
+  }
+  100%{
+    rotationAngle
+    bottom: 100%;
+  }
+}
