@@ -1,0 +1,30 @@
+body {
+  text-align: center;
+  font-family: Arial, Helvetica, san-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+.grid {
+  width: 400px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.grid li {
+  width: 100px;
+  height: 100px;
+  float: left;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+}
+
+.red    { background: #DE5842; }
+.green  { background: #BFE1BF ; }
+.black  { background: #EDEDEA; }
+.orange { background: #FCD059; }
+.blue   { background: #DE5842; }
