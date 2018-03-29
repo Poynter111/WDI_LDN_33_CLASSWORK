@@ -1,0 +1,72 @@
+body{
+  color:  #E9514C;
+}
+nav {
+  width: 100%;
+  height: 100px;
+  background-image: linear-gradient(to top, #e9514c, #dd518f, #aa6bbf, #5e81cd, #008bba);
+  margin-bottom: 20px;
+}
+h1{
+  font-weight: bold;
+  font-size: 100px;
+  color:  #D0C91F;
+}
+.wrap-main{
+  margin: 0 auto;
+  width: 800px;
+  align-content: center;
+  display: flex;
+}
+.controls button{
+  padding: 10px;
+  margin: 8px auto;
+}
+.controls{
+  width: 150px;
+  height: 250px;
+  background-color: #A7DBDB;
+  margin: 0 20px 0 0;
+  text-align: center;
+}
+.map-wrap{
+  width: 520px;
+  height: 520px;
+  background-color: #69D2E7;
+}
+.basetile{
+  width: 50px;
+  height: 50px;
+  float: left;
+}
+.grass{
+  background-color: #007034;
+  border: 1px dotted #007034;
+}
+.path{
+  background-color: #8C8535;
+  border: 1px dotted #8C8535;
+}
+.entrance{
+  background-color: #2B9464;
+  border: 1px dotted #2B9464;
+}
+.exit{
+  background-color: #D14D28;
+  border: 1px dotted #D14D28;
+}
+.tower1{
+  background-color: #666666;
+  border: 1px dotted #666666;
+}
+.tower2{
+  background-color: #000000;
+  border: 1px dotted #000000;
+}
+.tower3{
+  background-color: #CCCCCC;
+  border: 1px dotted #CCCCCC;
+}
+.availableTile{
+    border: 1px dotted red;
+}
