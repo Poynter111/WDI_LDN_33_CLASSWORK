@@ -68,5 +68,11 @@ h1{
   border: 1px dotted #CCCCCC;
 }
 .availableTile{
-    border: 1px dotted red;
+    border: 1px dotted #2B9464;
+    animation: border-pulsate 1.5s infinite;
+}
+@keyframes border-pulsate {
+    0%   { border: 1px dotted rgb(43, 148, 100, 1); }
+    50%  { border: 1px dotted rgb(43, 148, 100, 0.5); }
+    100% { border: 1px dotted rgb(43, 148, 100, 1); }
 }
