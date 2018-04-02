@@ -28,7 +28,7 @@ $(function(){
     },
   $tower2:
     {
-      name: 'Sinper',
+      name: 'Sniper',
       hTml: $('#2'),
       value: 100,
       range: 10,
@@ -93,10 +93,20 @@ $(function(){
   $controls.children('.cntrBtn').on('click', function(){
     var btnClicked = $(this).html();
     $(this).text(btnClicked);
-    event(btnClicked);
+    $.each(gameBoard, function(i, line){
+      $.each(line, (j, cell) => {
+        if (cell === 0){
+          $(`.cell_${i}_${j}`).addClass('availableTile');
+          event(btnClicked);
+        }
+      });
+    });
   });
   function event(btnClicked){
-    console.log(btnClicked);
+    $mapWrap.children('.availableTile').on('click', function(){
+      $(this).addClass('tower1');
+      console.log(btnClicked);
+    });
   }
   // $( "p" ).click(function() {
   //   var htmlString = $( this ).html();
