@@ -1,10 +1,7 @@
 $(function(){
-  //----------------------Map blueprint & Controls--------------------------
 
   var $mapWrap = $('.map-wrap');
   var $controls = $('.controls');
-  //-----------------------------------TOWERS-----------------------------------
-
 
   //---------------------------Map Generation-----------------------------------
   function mapBuilder(){
@@ -63,7 +60,6 @@ $(function(){
     event(btnClicked);
   });
   function event(btnClicked){
-
     $mapWrap.children('.availableTile').on('click', function(event){
       console.log(event);
       for(key in towers){
@@ -76,6 +72,12 @@ $(function(){
       }
     });
   }
+  function spawnMinion(){
+    var $mob =
+    $('<div class="mobs"/>');
+    $mapWrap.append($mob);
+  }
+
   // console.log(towers[key].name);
   //[key]
   //,
@@ -90,6 +92,7 @@ $(function(){
   // }
 
   //------------------------Build Map-------------------------------------------
+  spawnMinion();
   controlsFn();
   mapBuilder();
 });
