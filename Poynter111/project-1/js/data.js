@@ -8,7 +8,7 @@ var towers =
     value: 50,
     range: 5,
     class: 'tower1',
-    dmg: 1000
+    dmg: 2000
   },
   $tower2:
   {

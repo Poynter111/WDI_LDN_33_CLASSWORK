@@ -2,8 +2,8 @@ $(function(){
 
   var $mapWrap = $('.map-wrap');
   var $controls = $('.controls');
-  let $bullet;
-  let $mob = null;
+  const $bullet = $('<div class=bullet/>');
+  let $mob = $('<div class="mobs"/>');
   //---------------------------Map Generation-----------------------------------
   function mapBuilder(){
     $.each(gameBoard, function(i, line){
@@ -122,8 +122,9 @@ $(function(){
         $mob.append($('<div class="mobs"/>'));
         minion.pathHistory.push(minion.nextCell);
         minions[i] = minion;
+
       });
-    }, minions[0].speed )
+    }, minions[0].speed)
   };
 
 
@@ -161,29 +162,69 @@ $(function(){
   //   }, 500);
   // }
   // pauseLasers(object);
+
   function shoot(top, left){
-    $bullet = $('<div class=bullet/>');
     $bullet.css({
       left: left ,
       top: top
     });
     $bullet.appendTo($('.map-wrap')).animate({
-      left: $mob.offset().left + 25,
-      top: $mob.offset().top + 25
+      left: 300
     },{
       complete: function(){
         $bullet.stop().remove();
       }
     });
+    collisions();
+  }
+  // setInterval(function (){
+  //
+  //
+  // },10);
+
+  function collisions(){
+    console.log('collisions running');
+    console.log('mob-top--->', ($mob.offset().top));
+    console.log('mob-left--->', ($mob.offset().left));
+    console.log('bullet-top--->', ($bullet.offset().top));
+    console.log('bullet-left--->', ($bullet.offset().left));
+    const opponentLeft = $mob.offset().left;
+    const opponentTop = $mob.offset().top;
+    const opponentRight = opponentLeft + $mob.width();
+    const opponentBottom = opponentTop + $mob.height();
+
+    const laserTop = $bullet.offset().top;
+    const laserBottom = $bullet.offset().top + $bullet.height();
+    const laserLeft = $bullet.offset().left;
+    const laserRight = $bullet.offset().left + $bullet.width();
+
+    if ((laserRight > opponentLeft && laserRight < opponentRight &&
+      laserTop > opponentTop && laserBottom < opponentBottom) ||
+      (laserLeft > opponentRight && laserLeft < opponentLeft &&
+        laserTop > opponentTop && laserBottom < opponentBottom)){
+      console.log('BOOM');
+      $bullet.stop().remove();
+    }
   }
 
+
+
+  // function pauseLasers(object){
+  //   setTimeout(function(){
+  //     console.log('pauseLasers, noLasers is', object.noLasers);
+  //     clearInterval(bulletInterval);
+  //     object.noLasers = true;
+  //   }, 500);
+  // }
+  // pauseLasers(object);
 
 
 
 
 
   //------------------------Build Map-------------------------------------------
-  // coll();
   controlsFn();
   mapBuilder();
 });
+// $mob.offset().left + 50,
+// $mob.offset().top + 50
