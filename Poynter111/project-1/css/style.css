@@ -38,9 +38,10 @@ h1{
   width: 20px;
   height: 20px;
   background-color: #FE9601;
-  border: 1px dotted #FE9601;
   float: left;
   position: absolute;
+  margin: 15px 15px 15px 15px;
+  text-align: center;
 }
 .basetile{
   width: 50px;
@@ -48,12 +49,14 @@ h1{
   float: left;
 }
 .grass{
-  background-color: #007034;
   border: 1px dotted #007034;
+  background-color: #007034;
+  background-image: url("https://www.transparenttextures.com/patterns/pool-table.png");
 }
 .path{
   background-color: #8C8535;
   border: 1px dotted #8C8535;
+  background-image: url("https://www.transparenttextures.com/patterns/brick-wall.png");
 }
 .entrance{
   background-color: #2B9464;
@@ -80,7 +83,24 @@ h1{
     animation: border-pulsate 1.5s infinite;
 }
 @keyframes border-pulsate {
-    0%   { border: 1px dotted rgb(43, 148, 100, 1); }
-    50%  { border: 1px dotted rgb(43, 148, 100, 0.5); }
-    100% { border: 1px dotted rgb(43, 148, 100, 1); }
+    0%   { border: 1px dotted rgba(43, 148, 100, 1); }
+    50%  { border: 1px dotted rgba(43, 148, 100, 0.5); }
+    100% { border: 1px dotted rgba(43, 148, 100, 1); }
+}
+
+/* .fire-range{
+  background-color: rgba(255, 35, 33, 0.3);
+  width: 200px;
+  height: 200px;
+  position: absolute;
+   -webkit-transform: translate(-34%, -34%);
+  border-radius: 100%;
+} */
+.bullet
+{
+  background-color: red;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  position: absolute;
 }
