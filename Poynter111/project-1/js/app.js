@@ -6,6 +6,7 @@ $(function(){
   let $mob = $('<div class="mobs"/>');
   const cellClasses = ['grass', 'path', 'entrance', 'exit'];
   const DEV = false;
+  let width = 35;
 
   function log(arguments){
     if(DEV){
@@ -21,9 +22,7 @@ $(function(){
   function buildCell(cell, i, j){
     var $elem = $(`<div class="basetile cell_${i}_${j} " data-i='${i}' data-j='${j}'/>`);
     $mapWrap.append($elem.addClass(cellClasses[cell]));
-
   }
-
   //------------------------Tower managment and construction--------------------
   $controls.on('click', 'button', function(){
     var btnClicked = $(this).html();
@@ -37,6 +36,7 @@ $(function(){
     });
     event(btnClicked);
   });
+  //-Listens for turrets clicked on and declares which tiles can be places on---
   function event(btnClicked){
     $mapWrap.children('.availableTile').on('click', function(event){
       for(key in towers){
@@ -47,13 +47,12 @@ $(function(){
           $mapWrap.children().removeClass('availableTile');
           const turrentLocationTop = $(this).offset().top + 25;
           const turrentLocationLeft = $(this).offset().left + 25;
-          setInterval(() => {
             shoot(turrentLocationTop, turrentLocationLeft);
-          }, towers[key].speed); //TOWER RATE OF FIRE
         }
       }
     });
   }
+  //------Checks the cells around the minion to decide where to go next --------
   function nextCell(minion){
     const x = minion.nextCell[0];
     const y = minion.nextCell[1];
@@ -73,6 +72,7 @@ $(function(){
       return [x+ 1, y];
     }
   }
+  //------------------Mininon needs to find where to start----------------------
   function findEntrance(){
     let entrance = []
     $.each(gameBoard, function(i, line){
@@ -84,6 +84,7 @@ $(function(){
     });
     return entrance;
   }
+  //------------------------This code spawns the minion-------------------------
   var minionSpawm = {
     spawm: setInterval( function(){
       $.each(minions, function(i, minion){
@@ -101,18 +102,18 @@ $(function(){
         }
         $cell = $(`.cell_${minion.nextCell[0]}_${minion.nextCell[1]}`);
         $mob = $('<div class="mobs"/>');
-        $mob.append('<div class="life-bar">')
-        $mob.append('<div class="health-bar">')
+        $mob.append('<div class="life-bar">');
+        $mob.append(`<div class="health-bar" style=width:${width}px>`);
         $cell.append($mob);
-
         minion.pathHistory.push(minion.nextCell);
         minions[i] = minion;
       });
     }, minions[0].speed) //MINION SPEED
   };
-
-
+  //------------------------------Bullet manegment -----------------------------
+let shootingINT = null;
   function shoot(top, left){
+    shootingINT = setInterval(function(){
     $bullet
       .css({
         left: left ,
@@ -122,17 +123,16 @@ $(function(){
       .animate({
         left: $mob.offset().left + 20,
         top: $mob.offset().top + 10
-
       },{
         complete: function(){
           $bullet.stop().remove();
           console.log('shoot complete')
         }
       });
+    },towers.$tower1.speed)
   }
-  setInterval(collisions,10);
-  // setInterval(minionSpawm.spawm,3000);
-
+  //------------------------Collision detection---------------------------------
+  setInterval(collisions,10);//checking location of Mob and Bullets every 0.01s
   function boundaries(element){ // return element boundaries [top, right, bottom, left]
     const offset = element.offset()
     return [offset.top, offset.left+element.width(),offset.top+ element.height(), offset.left]
@@ -147,8 +147,8 @@ $(function(){
       console.log('BOOM');
       minionHit();
     }
-
   }
+  //--------------------On collision this code is executed----------------------
 function minionHit(){
   let health = minions[0].MaxHealth;
   let damage = towers.$tower1.dmg;
@@ -159,30 +159,26 @@ function minionHit(){
   if(health < 0){
     clearInterval(minionSpawm.spawm);
     $mob.remove();
-
+    clearInterval(shootingINT);
   }
 }
+  //------------------------Health Bar-------------------------------------------
 function healthBar(health){
   if (health <= 40){
-    $('.health-bar').css({
-      width: 28
-    })
+    width = 28
+    console.log('h<40',width);
   }if (health <= 30){
-    $('.health-bar').css({
-      width: 21
-    })
+    width = 21
+    console.log('h<30',width);
   }if (health <= 20){
-    $('.health-bar').css({
-      width: 14
-    })
+    width = 14
+    console.log('h<20',width);
   }if (health <= 10){
-    $('.health-bar').css({
-      width: 7
-    })
+    width = 7
+    console.log('h<10',width);
   }if (health <= 0){
-    $('.health-bar').css({
-      width: 0
-    })
+    width = 0
+    console.log('h0',width);
   }
 }
   //------------------------Build Map-------------------------------------------

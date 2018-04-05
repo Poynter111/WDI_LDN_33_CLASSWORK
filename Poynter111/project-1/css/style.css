@@ -53,7 +53,6 @@ h1{
 
 }
 .mobs .health-bar{
-  width: 35px;
   height: 5px;
   position: absolute;
   background-color: #76f576;
