@@ -30,6 +30,16 @@ var towers =
     class: 'tower3',
     speed: 1000,
     dmg: 10
+  },
+  $reset:
+  {
+    name: 'Reset',
+    hTml: $('#3'),
+    value: 150,
+    range: 5,
+    class: 'tower3',
+    speed: 1000,
+    dmg: 10
   }
 };
   //----------------------Map blueprint & Controls------------------------------
@@ -51,38 +61,7 @@ var minions = [{
   nextCell: [],
   pathHistory: [],
   MaxHealth: 50,
-  speed: 1000,
+  speed: 500,
   class: 'mobs',
   id: 'mobA'
 }];
-// ('.cell_${i}_${j-4}'),
-// $(`.cell_${i}_${j-5}`).append($mob),
-// $(`.cell_${i}_${j-6}`).append($mob),
-// $(`.cell_${i}_${j-7}`).append($mob),
-// $(`.cell_${i+1}_${j-7}`).append($mob),
-// $(`.cell_${i+2}_${j-7}`).append($mob),
-// $(`.cell_${i+2}_${j-6}`).append($mob),
-// $(`.cell_${i+2}_${j-5}`).append($mob),
-// $(`.cell_${i+2}_${j-4}`).append($mob),
-// $(`.cell_${i+2}_${j-3}`).append($mob),
-// $(`.cell_${i+2}_${j-2}`).append($mob),
-// $(`.cell_${i+3}_${j-2}`).append($mob),
-// $(`.cell_${i+4}_${j-2}`).append($mob),
-// $(`.cell_${i+4}_${j-3}`).append($mob),
-// $(`.cell_${i+4}_${j-4}`).append($mob),
-// $(`.cell_${i+4}_${j-5}`).append($mob),
-// $(`.cell_${i+5}_${j-5}`).append($mob),
-// $(`.cell_${i+6}_${j-5}`).append($mob),
-// $(`.cell_${i+6}_${j-6}`).append($mob),
-// $(`.cell_${i+6}_${j-7}`).append($mob),
-// $(`.cell_${i+6}_${j-8}`).append($mob),
-// $(`.cell_${i+7}_${j-8}`).append($mob),
-// $(`.cell_${i+8}_${j-8}`).append($mob),
-// $(`.cell_${i+8}_${j-7}`).append($mob),
-// $(`.cell_${i+8}_${j-6}`).append($mob),
-// $(`.cell_${i+8}_${j-5}`).append($mob),
-// $(`.cell_${i+8}_${j-4}`).append($mob),
-// $(`.cell_${i+8}_${j-3}`).append($mob),
-// $(`.cell_${i+8}_${j-2}`).append($mob),
-// $(`.cell_${i+8}_${j-1}`).append($mob),
-// $(`.cell_${i+9}_${j-1}`).append($mob)

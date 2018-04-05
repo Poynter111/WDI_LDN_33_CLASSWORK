@@ -1,5 +1,6 @@
 $(function(){
 
+  //---------------------------Global Variables---------------------------------
   var $mapWrap = $('.map-wrap');
   var $controls = $('.controls');
   const $bullet = $('<div class=bullet/>');
@@ -7,12 +8,8 @@ $(function(){
   const cellClasses = ['grass', 'path', 'entrance', 'exit'];
   const DEV = false;
   let width = 35;
-
-  function log(arguments){
-    if(DEV){
-      console.log(arguments)
-    }
-  }
+  let health = minions[0].MaxHealth;
+  const $audio = new Audio('./audio/gun.mp3');
   //---------------------------Map Generation-----------------------------------
   function mapBuilder(){
     $.each(gameBoard, function(i, line){
@@ -31,6 +28,7 @@ $(function(){
       $.each(line, (j, cell) => {
         if (cell === 0){
           $(`.cell_${i}_${j}`).addClass('availableTile');
+        }if (btnClicked === 'Reset'){
         }
       });
     });
@@ -47,7 +45,7 @@ $(function(){
           $mapWrap.children().removeClass('availableTile');
           const turrentLocationTop = $(this).offset().top + 25;
           const turrentLocationLeft = $(this).offset().left + 25;
-            shoot(turrentLocationTop, turrentLocationLeft);
+          shoot(turrentLocationTop, turrentLocationLeft);
         }
       }
     });
@@ -85,6 +83,7 @@ $(function(){
     return entrance;
   }
   //------------------------This code spawns the minion-------------------------
+
   var minionSpawm = {
     spawm: setInterval( function(){
       $.each(minions, function(i, minion){
@@ -111,31 +110,33 @@ $(function(){
     }, minions[0].speed) //MINION SPEED
   };
   //------------------------------Bullet manegment -----------------------------
-let shootingINT = null;
+  let shootingINT = null;
   function shoot(top, left){
     shootingINT = setInterval(function(){
-    $bullet
-      .css({
-        left: left ,
-        top: top
-      })
-      .appendTo($('.map-wrap'))
-      .animate({
-        left: $mob.offset().left + 20,
-        top: $mob.offset().top + 10
-      },{
-        complete: function(){
-          $bullet.stop().remove();
-          console.log('shoot complete')
-        }
-      });
+      $audio.play();
+      $bullet
+        .css({
+          left: left ,
+          top: top
+        })
+        .appendTo($('.map-wrap'))
+        .animate({
+          left: $mob.offset().left + 20,
+          top: $mob.offset().top + 10
+        },{
+          complete: function(){
+            $bullet.stop().remove();
+            console.log('shoot complete');
+          }
+        });
     },towers.$tower1.speed)
   }
   //------------------------Collision detection---------------------------------
   setInterval(collisions,10);//checking location of Mob and Bullets every 0.01s
+
   function boundaries(element){ // return element boundaries [top, right, bottom, left]
-    const offset = element.offset()
-    return [offset.top, offset.left+element.width(),offset.top+ element.height(), offset.left]
+    const offset = element.offset();
+    return [offset.top, offset.left+element.width(),offset.top+ element.height(), offset.left];
   }
   function collisions(){
     [ot, or, ob, ol] = boundaries($mob);
@@ -146,41 +147,34 @@ let shootingINT = null;
       $bullet.stop().remove();
       console.log('BOOM');
       minionHit();
+      healthBar(health);
     }
   }
   //--------------------On collision this code is executed----------------------
-function minionHit(){
-  let health = minions[0].MaxHealth;
-  let damage = towers.$tower1.dmg;
-  health -= damage;
-   minions[0].MaxHealth = health;
-   console.log(health);
-   healthBar(health);
-  if(health < 0){
-    clearInterval(minionSpawm.spawm);
-    $mob.remove();
-    clearInterval(shootingINT);
+  function minionHit(){
+    let damage = towers.$tower1.dmg;
+    health -= damage;
+    minions[0].MaxHealth = health;
+    if(health <= 0){ // Minion KILLED
+      clearInterval(minionSpawm.spawm);
+      $mob.remove();
+      clearInterval(shootingINT);
+    }
   }
-}
   //------------------------Health Bar-------------------------------------------
-function healthBar(health){
-  if (health <= 40){
-    width = 28
-    console.log('h<40',width);
-  }if (health <= 30){
-    width = 21
-    console.log('h<30',width);
-  }if (health <= 20){
-    width = 14
-    console.log('h<20',width);
-  }if (health <= 10){
-    width = 7
-    console.log('h<10',width);
-  }if (health <= 0){
-    width = 0
-    console.log('h0',width);
+  function healthBar(health){
+    if (health <= 41){
+      width = 28;
+    }if (health <= 31){
+      width = 21;
+    }if (health <= 21){
+      width = 14;
+    }if (health <= 11){
+      width = 7;
+    }if (health <= 0){
+      width = 0;
+    }
   }
-}
   //------------------------Build Map-------------------------------------------
   function setup(){
     for(key in towers){
