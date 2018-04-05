@@ -8,7 +8,8 @@ var towers =
     value: 50,
     range: 5,
     class: 'tower1',
-    dmg: 2000
+    speed: 500,
+    dmg: 10
   },
   $tower2:
   {
@@ -17,7 +18,8 @@ var towers =
     value: 100,
     range: 10,
     class: 'tower2',
-    dmg: 5000
+    speed: 1000,
+    dmg: 10
   },
   $tower3:
   {
@@ -26,12 +28,13 @@ var towers =
     value: 150,
     range: 5,
     class: 'tower3',
-    dmg: 10000
+    speed: 1000,
+    dmg: 10
   }
 };
   //----------------------Map blueprint & Controls------------------------------
 var gameBoard =[
-  [0,0,1,1,1,1,1,1,1,6],
+  [0,0,1,1,1,1,1,1,1,2],
   [0,0,1,0,0,0,0,0,0,0],
   [0,0,1,1,1,1,1,1,0,0],
   [0,0,0,0,0,0,0,1,0,0],
@@ -40,15 +43,15 @@ var gameBoard =[
   [0,1,1,1,1,0,0,0,0,0],
   [0,1,0,0,0,0,0,0,0,0],
   [0,1,1,1,1,1,1,1,1,0],
-  [0,0,0,0,0,0,0,0,7,0]
+  [0,0,0,0,0,0,0,0,3,0]
 ];
 //---------------------------------Minnions-------------------------------------
 var minions = [{
   name: 'Minions',
   nextCell: [],
   pathHistory: [],
-  health: 150,
-  speed: 200,
+  MaxHealth: 50,
+  speed: 1000,
   class: 'mobs',
   id: 'mobA'
 }];

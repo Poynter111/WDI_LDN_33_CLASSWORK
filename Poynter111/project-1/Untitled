@@ -4,28 +4,45 @@ $(function(){
   var $controls = $('.controls');
   const $bullet = $('<div class=bullet/>');
   let $mob = $('<div class="mobs"/>');
-  const cellClasses = ['grass', 'path', 'entrance', 'exit'];
-  const DEV = false;
-
-  function log(arguments){
-    if(DEV){
-      console.log(arguments)
-    }
-  }
   //---------------------------Map Generation-----------------------------------
   function mapBuilder(){
     $.each(gameBoard, function(i, line){
-      $.each(line, (j, cell) => buildCell(cell, i, j));
+      $.each(line, (j, cell) => {
+        buildCell(cell, i, j);
+      });
     });
   }
   function buildCell(cell, i, j){
-    var $elem = $(`<div class="basetile cell_${i}_${j} " data-i='${i}' data-j='${j}'/>`);
-    $mapWrap.append($elem.addClass(cellClasses[cell]));
-
+    var $elem =
+    $(`<div class="basetile cell_${i}_${j} " data-i='${i}' data-j='${j}'/>`);
+    if (cell === 0){
+      $mapWrap.append($elem.addClass('grass'));
+    } if (cell === 1){
+      $mapWrap.append($elem.addClass('path'));
+    } if (cell === 2){
+      $mapWrap.append($elem.addClass('tower'));
+    }if (cell === 6){
+      $mapWrap.append($elem.addClass('entrance'));
+    } if (cell === 7){
+      $mapWrap.append($elem.addClass('exit'));
+    }
   }
-
+  //-------------------------------Controls-------------------------------------
+  function controlsFn(){
+    $controls.children('.cntrBtn').each(function(){
+      if($(this).attr('id') === '1'){
+        $(this).text(towers.$tower1.name);
+      }
+      if($(this).attr('id') === '2'){
+        $(this).text(towers.$tower2.name);
+      }
+      if($(this).attr('id') === '3'){
+        $(this).text(towers.$tower3.name);
+      }
+    });
+  }
   //------------------------Tower managment and construction--------------------
-  $controls.on('click', 'button', function(){
+  $controls.children('.cntrBtn').on('click', function(){
     var btnClicked = $(this).html();
     $(this).text(btnClicked);
     $.each(gameBoard, function(i, line){
@@ -42,14 +59,15 @@ $(function(){
       for(key in towers){
         if (towers[key].name === btnClicked){
           var selectedT  = towers[key].class;
-          $(this).addClass(selectedT).append('<div class="fire-range" />');
+          $(this).addClass(selectedT);
+          $(this).append('<div class="fire-range" />')
           $mapWrap.children('.availableTile').off('click');
           $mapWrap.children().removeClass('availableTile');
           const turrentLocationTop = $(this).offset().top + 25;
           const turrentLocationLeft = $(this).offset().left + 25;
           setInterval(() => {
             shoot(turrentLocationTop, turrentLocationLeft);
-          }, towers[key].speed); //TOWER RATE OF FIRE
+          }, towers[key].dmg); //TOWER RATE OF FIRE
         }
       }
     });
@@ -77,7 +95,7 @@ $(function(){
     let entrance = []
     $.each(gameBoard, function(i, line){
       $.each(line, (j, cell) => {
-        if (cell === 2){
+        if (cell === 6){
           entrance = [i,j];
         }
       });
@@ -93,104 +111,66 @@ $(function(){
           minion.nextCell = nextCell(minion);
           if (minion.nextCell === undefined){
             minion.nextCell  = findEntrance();
+            clearInterval();
           }
         }
         const prevCell = minion.pathHistory[minion.pathHistory.length-1];
         if(prevCell){
           $(`.cell_${prevCell[0]}_${prevCell[1]}`).empty();
         }
-        $cell = $(`.cell_${minion.nextCell[0]}_${minion.nextCell[1]}`);
-        $mob = $('<div class="mobs"/>');
-        $mob.append('<div class="life-bar">')
-        $mob.append('<div class="health-bar">')
-        $cell.append($mob);
-
+        $mob = $(`.cell_${minion.nextCell[0]}_${minion.nextCell[1]}`);
+        $mob.append($('<div class="mobs"/>'));
         minion.pathHistory.push(minion.nextCell);
         minions[i] = minion;
+
       });
     }, minions[0].speed) //MINION SPEED
   };
-
-
   function shoot(top, left){
-    $bullet
-      .css({
-        left: left ,
-        top: top
-      })
-      .appendTo($('.map-wrap'))
-      .animate({
-        left: $mob.offset().left + 20,
-        top: $mob.offset().top + 10
-
-      },{
-        complete: function(){
-          $bullet.stop().remove();
-          console.log('shoot complete')
-        }
-      });
+    $bullet.css({
+      left: left ,
+      top: top
+    });
+    $bullet.appendTo($('.map-wrap')).animate({
+      left: $mob.offset().left + 25,
+      top: $mob.offset().top + 25
+    },{
+      complete: function(){
+        $bullet.stop().remove();
+      }
+    });
   }
-  setInterval(collisions,10);
-  // setInterval(minionSpawm.spawm,3000);
+  setInterval(function (){
+    collisions();
+  },10);
 
-  function boundaries(element){ // return element boundaries [top, right, bottom, left]
-    const offset = element.offset()
-    return [offset.top, offset.left+element.width(),offset.top+ element.height(), offset.left]
-  }
   function collisions(){
-    [ot, or, ob, ol] = boundaries($mob);
-    [lt, lr, lb, ll] = boundaries($bullet);
+    console.log('collisions running');
+    console.log('mob-top--->', ($mob.offset().top));
+    console.log('mob-left--->', ($mob.offset().left));
+    console.log('bullet-top--->', ($bullet.offset().top));
+    console.log('bullet-left--->', ($bullet.offset().left));
+    const opponentLeft = $mob.offset().left;
+    const opponentTop = $mob.offset().top;
+    const opponentRight = opponentLeft + $mob.width();
+    const opponentBottom = opponentTop + $mob.height();
 
-    if ((lr > ol && lr < or && lt > ot && lb < ob) ||
-        (ll > or && ll < ol && lt > ot && lb < ob) ){
-      $bullet.stop().remove();
+    const laserTop = $bullet.offset().top;
+    const laserBottom = $bullet.offset().top + $bullet.height();
+    const laserLeft = $bullet.offset().left;
+    const laserRight = $bullet.offset().left + $bullet.width();
+
+    if ((laserRight > opponentLeft && laserRight < opponentRight &&
+      laserTop > opponentTop && laserBottom < opponentBottom) ||
+      (laserLeft > opponentRight && laserLeft < opponentLeft &&
+        laserTop > opponentTop && laserBottom < opponentBottom)){
       console.log('BOOM');
-      minionHit();
+      // alert('BOOM');
+      $bullet.stop().remove();
     }
+  }
 
-  }
-function minionHit(){
-  let health = minions[0].MaxHealth;
-  let damage = towers.$tower1.dmg;
-  health -= damage;
-   minions[0].MaxHealth = health;
-   console.log(health);
-   healthBar(health);
-  if(health < 0){
-    clearInterval(minionSpawm.spawm);
-    $mob.remove();
-
-  }
-}
-function healthBar(health){
-  if (health <= 40){
-    $('.health-bar').css({
-      width: 28
-    })
-  }if (health <= 30){
-    $('.health-bar').css({
-      width: 21
-    })
-  }if (health <= 20){
-    $('.health-bar').css({
-      width: 14
-    })
-  }if (health <= 10){
-    $('.health-bar').css({
-      width: 7
-    })
-  }if (health <= 0){
-    $('.health-bar').css({
-      width: 0
-    })
-  }
-}
   //------------------------Build Map-------------------------------------------
-  function setup(){
-    for(key in towers){
-      $(`<button class='cntrBtn'>${towers[key].name}</button>`).appendTo('.controls');
-    }
-    mapBuilder();
-  }
-  setup();
+  controlsFn();
+  mapBuilder();
 });
