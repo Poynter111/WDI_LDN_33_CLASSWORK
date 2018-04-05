@@ -3,13 +3,30 @@ $(function(){
   //---------------------------Global Variables---------------------------------
   var $mapWrap = $('.map-wrap');
   var $controls = $('.controls');
-  const $bullet = $('<div class=bullet/>');
+  let $bullet = $('<div class=bullet/>');
   let $mob = $('<div class="mobs"/>');
   const cellClasses = ['grass', 'path', 'entrance', 'exit'];
   const DEV = false;
   let width = 35;
   let health = minions[0].MaxHealth;
   const $audio = new Audio('./audio/gun.mp3');
+  var $modal = $('#myModal');
+  var $span = $('.close');
+  //------------------------Game Over and Restart-------------------------------
+  function restart(){
+    window.location.reload();
+    console.log('restart');
+  }
+  function closeModal() {
+    $modal.css({
+      display: 'none'
+    });
+    restart();
+  }
+  $span.on('click', function(){
+    closeModal();
+  })
+
   //---------------------------Map Generation-----------------------------------
   function mapBuilder(){
     $.each(gameBoard, function(i, line){
@@ -29,6 +46,7 @@ $(function(){
         if (cell === 0){
           $(`.cell_${i}_${j}`).addClass('availableTile');
         }if (btnClicked === 'Reset'){
+          findEntrance();
         }
       });
     });
@@ -83,53 +101,74 @@ $(function(){
     return entrance;
   }
   //------------------------This code spawns the minion-------------------------
-
+  let spawnINT = null;
   var minionSpawm = {
-    spawm: setInterval( function(){
-      $.each(minions, function(i, minion){
-        if(minion.nextCell.length === 0){
-          minion.nextCell  = findEntrance();
-        }else{
-          minion.nextCell = nextCell(minion);
-          if (minion.nextCell === undefined){
+    spawm: function(){
+      spawnINT = setInterval( function(){
+        $.each(minions, function(i, minion){
+          if(minion.nextCell.length === 0){
             minion.nextCell  = findEntrance();
+          }else{
+            minion.nextCell = nextCell(minion);
+            if (minion.nextCell === undefined){
+              minion.nextCell  = findEntrance();
+            }
           }
-        }
-        const prevCell = minion.pathHistory[minion.pathHistory.length-1];
-        if(prevCell){
-          $(`.cell_${prevCell[0]}_${prevCell[1]}`).empty();
-        }
-        $cell = $(`.cell_${minion.nextCell[0]}_${minion.nextCell[1]}`);
-        $mob = $('<div class="mobs"/>');
-        $mob.append('<div class="life-bar">');
-        $mob.append(`<div class="health-bar" style=width:${width}px>`);
-        $cell.append($mob);
-        minion.pathHistory.push(minion.nextCell);
-        minions[i] = minion;
-      });
-    }, minions[0].speed) //MINION SPEED
+          const prevCell = minion.pathHistory[minion.pathHistory.length-1];
+          if(prevCell){
+            $(`.cell_${prevCell[0]}_${prevCell[1]}`).empty();
+          }
+          $cell = $(`.cell_${minion.nextCell[0]}_${minion.nextCell[1]}`);
+          $mob = $('<div class="mobs"/>');
+          $mob.append('<div class="life-bar">');
+          $mob.append(`<div class="health-bar" style=width:${width}px>`);
+          $cell.append($mob);
+          minion.pathHistory.push(minion.nextCell);
+          minions[i] = minion;
+        });
+      }, minions[0].speed); //MINION SPEED
+    }
   };
   //------------------------------Bullet manegment -----------------------------
+  // let shootingINT = null;
+  // function shoot(top, left){
+  //   shootingINT = setInterval(function(){
+  //     $audio.play();
+  //     $bullet
+  //       .css({
+  //         left: left ,
+  //         top: top
+  //       })
+  //       .appendTo($('.map-wrap'))
+  //       .animate({
+  //         left: $mob.offset().left + 20,
+  //         top: $mob.offset().top + 10
+  //       },{
+  //         complete: function(){
+  //           $bullet.stop().remove();
+  //           console.log('shoot complete');
+  //         }
+  //       });
+  //   },towers.$tower1.speed)
+  // }
+
   let shootingINT = null;
   function shoot(top, left){
     shootingINT = setInterval(function(){
       $audio.play();
-      $bullet
-        .css({
-          left: left ,
-          top: top
-        })
-        .appendTo($('.map-wrap'))
-        .animate({
-          left: $mob.offset().left + 20,
-          top: $mob.offset().top + 10
-        },{
-          complete: function(){
-            $bullet.stop().remove();
-            console.log('shoot complete');
-          }
-        });
-    },towers.$tower1.speed)
+      $bullet.css({
+        left: left ,
+        top: top
+      });
+      $bullet.appendTo($('.map-wrap')).animate({
+        left: $mob.offset().left + 20,
+        top: $mob.offset().top + 10
+      },{
+        complete: function(){
+          $bullet.stop().remove();
+        }
+      });
+    }, towers.$tower1.speed);
   }
   //------------------------Collision detection---------------------------------
   setInterval(collisions,10);//checking location of Mob and Bullets every 0.01s
@@ -156,11 +195,19 @@ $(function(){
     health -= damage;
     minions[0].MaxHealth = health;
     if(health <= 0){ // Minion KILLED
-      clearInterval(minionSpawm.spawm);
+      clearInterval(spawnINT);
       $mob.remove();
       clearInterval(shootingINT);
+      displayModal();
     }
   }
+  function displayModal() {
+    $modal.css({
+      display: 'block'
+    });
+  }
+
+
   //------------------------Health Bar-------------------------------------------
   function healthBar(health){
     if (health <= 41){
@@ -175,6 +222,7 @@ $(function(){
       width = 0;
     }
   }
+
   //------------------------Build Map-------------------------------------------
   function setup(){
     for(key in towers){
@@ -183,4 +231,5 @@ $(function(){
     mapBuilder();
   }
   setup();
+  minionSpawm.spawm();
 });
