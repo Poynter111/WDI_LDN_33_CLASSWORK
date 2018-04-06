@@ -10,6 +10,7 @@ $(function(){
   let width = 35;
   let health = minions[0].MaxHealth;
   const $audio = new Audio('./audio/gun.mp3');
+  const $audio2 = new Audio('./audio/music.wav');
   var $modal = $('#myModal');
   var $span = $('.close');
   //------------------------Game Over and Restart-------------------------------
@@ -26,7 +27,6 @@ $(function(){
   $span.on('click', function(){
     closeModal();
   })
-
   //---------------------------Map Generation-----------------------------------
   function mapBuilder(){
     $.each(gameBoard, function(i, line){
@@ -135,28 +135,6 @@ $(function(){
   };
 
   //------------------------------Bullet manegment -----------------------------
-  // let shootingINT = null;
-  // function shoot(top, left){
-  //   shootingINT = setInterval(function(){
-  //     $audio.play();
-  //     $bullet
-  //       .css({
-  //         left: left ,
-  //         top: top
-  //       })
-  //       .appendTo($('.map-wrap'))
-  //       .animate({
-  //         left: $mob.offset().left + 20,
-  //         top: $mob.offset().top + 10
-  //       },{
-  //         complete: function(){
-  //           $bullet.stop().remove();
-  //           console.log('shoot complete');
-  //         }
-  //       });
-  //   },towers.$tower1.speed)
-  // }
-
   let shootingINT = null;
   function shoot(top, left){
     shootingINT = setInterval(function(){
@@ -241,4 +219,5 @@ $(function(){
   }
   setup();
   minionSpawm.spawm();
+  $audio2.play();
 });

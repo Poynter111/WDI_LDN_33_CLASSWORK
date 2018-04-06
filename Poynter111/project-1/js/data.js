@@ -3,12 +3,12 @@ var towers =
 {
   $tower1:
   {
-    name: 'Machine',
+    name: 'Machine Gun',
     hTml: $('#1'),
     value: 50,
     range: 5,
     class: 'tower1',
-    speed: 500,
+    speed: 100,
     dmg: 10
   },
   $tower2:
@@ -30,24 +30,14 @@ var towers =
     class: 'tower3',
     speed: 1000,
     dmg: 10
-  },
-  $reset:
-  {
-    name: 'Reset',
-    hTml: $('#3'),
-    value: 150,
-    range: 5,
-    class: 'tower3',
-    speed: 1000,
-    dmg: 10
   }
 };
   //----------------------Map blueprint & Controls------------------------------
 var gameBoard =[
   [0,0,1,1,1,1,1,1,1,2],
   [0,0,1,0,0,0,0,0,0,0],
-  [0,1,1,0,1,1,1,1,1,0],
-  [0,1,0,0,1,0,0,0,1,0],
+  [0,1,1,0,1,1,1,0,0,0],
+  [0,1,0,0,1,0,1,1,1,0],
   [0,1,1,1,1,0,0,0,1,0],
   [0,0,0,0,0,0,1,1,1,0],
   [0,1,1,1,1,1,1,0,0,0],
