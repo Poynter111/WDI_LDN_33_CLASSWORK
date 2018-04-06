@@ -102,6 +102,7 @@ $(function(){
   }
   //------------------------This code spawns the minion-------------------------
   let spawnINT = null;
+
   var minionSpawm = {
     spawm: function(){
       spawnINT = setInterval( function(){
@@ -111,7 +112,10 @@ $(function(){
           }else{
             minion.nextCell = nextCell(minion);
             if (minion.nextCell === undefined){
-              minion.nextCell  = findEntrance();
+              // minion.nextCell  = findEntrance();
+              displayModalN();
+              clearInterval(spawnINT);
+              clearInterval(shootingINT);
             }
           }
           const prevCell = minion.pathHistory[minion.pathHistory.length-1];
@@ -129,6 +133,7 @@ $(function(){
       }, minions[0].speed); //MINION SPEED
     }
   };
+
   //------------------------------Bullet manegment -----------------------------
   // let shootingINT = null;
   // function shoot(top, left){
@@ -198,16 +203,21 @@ $(function(){
       clearInterval(spawnINT);
       $mob.remove();
       clearInterval(shootingINT);
-      displayModal();
+      displayModalW();
     }
   }
-  function displayModal() {
+  function displayModalW() {
+    $('#msg').append('You win.');
     $modal.css({
       display: 'block'
     });
   }
-
-
+  function displayModalN() {
+    $('#msg').append('You Lose.');
+    $modal.css({
+      display: 'block'
+    });
+  }
   //------------------------Health Bar-------------------------------------------
   function healthBar(health){
     if (health <= 41){
@@ -222,7 +232,6 @@ $(function(){
       width = 0;
     }
   }
-
   //------------------------Build Map-------------------------------------------
   function setup(){
     for(key in towers){

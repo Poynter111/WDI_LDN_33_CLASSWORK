@@ -67,7 +67,7 @@ h1{
 .grass{
   border: 1px solid #007034;
   background-color: #007034;
-  background-image: url("https://www.transparenttextures.com/patterns/pool-table.png");
+
 }
 .path{
   background-color: #8C8535;
@@ -134,10 +134,11 @@ h1{
 }
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
+    margin: 8% auto; /* 15% from the top and centered */
+    padding: 50px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 49%; /* Could be more or less, depending on screen size */
+    height: 38%;
 }
 
 /* The Close Button */
@@ -147,7 +148,6 @@ h1{
     font-size: 28px;
     font-weight: bold;
 }
-
 .close:hover,
 .close:focus {
     color: black;
