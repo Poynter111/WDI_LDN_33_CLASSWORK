@@ -2,6 +2,7 @@ const express    = require('express');
 const app        = express();
 const bodyParser = require('body-parser');
 const port       = process.env.PORT || 3000;
+const router = require('./config/routes');
 
 // Set the view directory to /views
 app.set('views', `${__dirname}/views`);
@@ -17,6 +18,8 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.get('/', (req, res) => res.render('index'));
+
+
+app.use('/', router);
 
 app.listen(port);

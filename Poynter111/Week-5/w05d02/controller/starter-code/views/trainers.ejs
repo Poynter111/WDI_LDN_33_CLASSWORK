@@ -1,0 +1,16 @@
+<h1>Trainers</h1>
+
+<ul>
+  <% trainers.forEach(trainer => { %>
+      <li>
+        <h3><%= trainer.model %></h3>
+        <h3><%= trainer.brand %></h3>
+        <ul>
+        <% trainer.colors.forEach(color => { %>
+        <li style="color:<%= color %>;"><%= color  %><div style="display: inline-block; width: 40px; height: 40px; border-radius:100%; background-color:<%= color %>"></div></li>
+
+      <% }); %>
+        </ul>
+      </li>
+<% }) %>
+</ul>
