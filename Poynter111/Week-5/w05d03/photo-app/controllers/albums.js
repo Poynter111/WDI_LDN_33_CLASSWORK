@@ -1,6 +1,5 @@
 const Album = require('../models/album');
 
-
 function albumsIndex(req, res){
   Album
     .find()
@@ -9,7 +8,6 @@ function albumsIndex(req, res){
       res.render('albums/index', {album});
     });
 }
-
 
 function albumsShow(req, res){
   Album
@@ -22,6 +20,7 @@ function albumsShow(req, res){
 function albumsNew(req, res){
   res.render('albums/new');
 }
+
 function albumsCreate(req, res){
   console.log(req.body);
   Album
@@ -45,8 +44,9 @@ function albumsUpdate(req, res){
       album = Object.assign(album, req.body);
       return album.save();
     })
-    .then(album => res.redirect(`/albums/${album._id}`))
+    .then(album => res.redirect(`/albums/${album._id}`));
 }
+
 function albumsDelete(req, res){
   Album
     .findById(req.params.id)
@@ -54,9 +54,6 @@ function albumsDelete(req, res){
     .then(album => album.remove())
     .then(() => res.redirect('/albums'));
 }
-
-
-
 module.exports = {
   index: albumsIndex,
   show: albumsShow,

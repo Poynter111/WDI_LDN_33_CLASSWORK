@@ -44,7 +44,5 @@ Photo.create([{
 })
 .then(photos => console.log(`${photos.length} created`))
 
-
-
 .catch(err => console.log(err))
 .finally(()=> mongoose.connection.close())
