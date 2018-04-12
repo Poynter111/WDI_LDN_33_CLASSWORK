@@ -18,5 +18,9 @@ router.route('/albums/:id')
 router.route('/albums/:id/edit')
   .get(albums.edit);
 
+router.route('/*').get((req, res) => {
+  res.render('statics/404');
+});
+
 
 module.exports = router;

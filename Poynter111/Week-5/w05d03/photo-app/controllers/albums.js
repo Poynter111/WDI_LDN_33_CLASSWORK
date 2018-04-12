@@ -18,14 +18,19 @@ function albumsShow(req, res){
 }
 
 function albumsNew(req, res){
-  res.render('albums/new');
+  res.render('albums/new', {error: null});
 }
 
 function albumsCreate(req, res){
   console.log(req.body);
   Album
     .create(req.body)
-    .then(() => res.redirect('/albums'));
+    .then(() => res.redirect('/albums'))
+    .catch((error) => {
+      if(error.name === 'ValidationError'){
+        return res.badRequest('/albums/new', error.toString());
+      }
+    });
 }
 
 function albumsEdit(req, res){

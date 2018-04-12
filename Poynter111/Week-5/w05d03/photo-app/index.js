@@ -1,13 +1,15 @@
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-const methodOverride = require('method-override');
-const morgan = require('morgan');
-const expressLayouts = require('express-ejs-layouts');
-const mongoose = require('mongoose');
-
-const {port, databaseURI} = require('./config/environment');
-const routes = require('./config/routes');
+const express                 = require('express');
+const app                     = express();
+const bodyParser              = require('body-parser');
+const methodOverride          = require('method-override');
+const morgan                  = require('morgan');
+const expressLayouts          = require('express-ejs-layouts');
+const mongoose                = require('mongoose');
+const flash                   = require('express-flash');
+const session                 = require('express-session');
+const {port, databaseURI}     = require('./config/environment');
+const customResponses         = require('./lib/customResponses');
+const routes                  = require('./config/routes');
 
 mongoose.connect(databaseURI);
 
@@ -27,6 +29,25 @@ app.use(methodOverride(req => {
   }
 }));
 
+app.use(session({
+  secret: 'My super secret token',
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use(flash());
+app.use(customResponses);
 app.use(routes);
+
+app.use((err, req, res, next) => {
+  if(err){
+    err.status = err.status || 500;
+    err.message = err.message || 'Internal Server Error';
+    res.status(err.status);
+    res.locals.err = err;
+    return res.render(`statics/${err.status}`);
+  }
+  next();
+});
 
 app.listen(port, () => console.log(`Running on port${port}`));
