@@ -2,19 +2,50 @@
 <h2>Albums</h2>
 </div>
 <div class="row">
-  <% album.forEach(album => { %>
-    <div class="col s12 m6">
-      <div class="card green accent-3">
-        <div class="card-content white-text">
-          <span class="card-title"><%= album.name %></span>
-          <p> <%= album.location %></p>
-          <p> <%= album.year.getFullYear() %></p>
-        </div>
-        <div class="card-action">
-          <a href="/albums/<%= album._id %>" class="green-text">View Album</a>
-          <a href="/albums/<%= album._id %>/edit" class="orange-text">Edit Album</a>
-        </div>
-      </div>
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s3"><a href="#test1" class="active">All Albums</a></li>
+        <% if(locals.isLoggedIn) { %>
+        <li class="tab col s3"><a class="active" href="#test2">My Albums</a></li>
+        <% } %>
+      </ul>
     </div>
-  <% }); %>
+    <div id="test1" class="col s12">
+      <% album.forEach(album => { %>
+        <div class="col s12 m6">
+          <div class="card green accent-3">
+            <div class="card-content white-text">
+              <span class="card-title"><%= album.name %></span>
+              <p> <%= album.location %></p>
+              <p> <%= album.year.getFullYear() %></p>
+            </div>
+            <div class="card-action">
+              <a href="/albums/<%= album._id %>" class="green-text">View Album</a>
+              <a href="/albums/<%= album._id %>/edit" class="orange-text">Edit Album</a>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+    </div>
+     <% if(locals.isLoggedIn) {%>
+    <div id="test2" class="col s12">
+      <% album.forEach(album => { %>
+        <% if((album.user && album.user.id) === locals.user.id) { %>
+        <div class="col s12 m6">
+          <div class="card green accent-3">
+            <div class="card-content white-text">
+              <span class="card-title"><%= album.name %></span>
+              <p> <%= album.location %></p>
+              <p> <%= album.year.getFullYear() %></p>
+            </div>
+            <div class="card-action">
+              <a href="/albums/<%= album._id %>" class="green-text">View Album</a>
+              <a href="/albums/<%= album._id %>/edit" class="orange-text">Edit Album</a>
+            </div>
+          </div>
+        </div>
+        <% } %>
+      <% }) %>
+      <% } %>
+    </div>
 </div>

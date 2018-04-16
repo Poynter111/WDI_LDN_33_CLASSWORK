@@ -1,7 +1,7 @@
 const User = require('../models/user');
 
 function newRoute(req, res) {
-  res.render('registrations/new');
+  res.render('registrations/index');
 }
 
 function createRoute(req, res){
@@ -12,7 +12,7 @@ function createRoute(req, res){
     })
     .catch((err)=> {
       if(err.name === 'ValidationError'){
-        return res.status(400).render('registrations/new',{message: err.toString()});
+        return res.status(400).render('registrations/index',{message: err.toString()});
       }
     });
 }

@@ -1,7 +1,7 @@
 const User = require('../models/user');
 
 function newRoute(req, res) {
-  res.render('sessions/new');
+  res.render('sessions/index');
 }
 
 function createRoute(req, res) {
@@ -10,7 +10,7 @@ function createRoute(req, res) {
     .then((user) => {
       console.log(user);
       if(!user || !user.validatePassword(req.body.password)){
-        res.status(401).render('sessions/new', {message: 'Wrong credentials'});
+        res.status(401).render('sessions/index', {message: 'Wrong credentials'});
       }
       req.session.userId = user.id;
       res.redirect('/');

@@ -1,1 +1,10 @@
 <h1>Photo-Album</h1>
+<% if(messages.danger){ %>
+  <div class="col s12 l12">
+    <div class="card red lighten-3">
+      <div class="card-content red-text">
+        <span class="card-title"><%= messages.danger %></span>
+      </div>
+    </div>
+  </div>
+<% } %>

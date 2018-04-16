@@ -3,6 +3,7 @@ const Album = require('../models/album');
 function albumsIndex(req, res){
   Album
     .find()
+    .populate('user')
     .exec()
     .then(album => {
       res.render('albums/index', {album});
@@ -22,7 +23,7 @@ function albumsNew(req, res){
 }
 
 function albumsCreate(req, res){
-  console.log(req.body);
+  req.body.user = req.currentUser;
   Album
     .create(req.body)
     .then(() => res.redirect('/albums'))

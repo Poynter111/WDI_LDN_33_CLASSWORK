@@ -10,6 +10,7 @@ const session                 = require('express-session');
 const {port, databaseURI}     = require('./config/environment');
 const customResponses         = require('./lib/customResponses');
 const routes                  = require('./config/routes');
+const User                    = require('./models/user');
 
 mongoose.connect(databaseURI);
 
@@ -37,6 +38,23 @@ app.use(session({
 
 app.use(flash());
 app.use(customResponses);
+
+app.use((req, res, next) =>{
+  if(!req.session.userId) return next();
+
+  User
+    .findById(req.session.userId)
+    .then((user) =>{
+      req.session.userId = user._id;
+      res.locals.user = user;
+      req.currentUser = user;
+      res.locals.isLoggedIn = true;
+      next();
+    });
+
+
+});
+
 app.use(routes);
 
 app.use((err, req, res, next) => {

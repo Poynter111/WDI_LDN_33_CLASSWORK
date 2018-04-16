@@ -7,6 +7,11 @@ function indexRoute(req, res) {
     .then((users) => res.render('index', { users }));
 }
 
+function privateRoute(req, res,){
+  res.render('private');
+}
+
 module.exports = {
-  index: indexRoute
+  index: indexRoute,
+  private: privateRoute
 };

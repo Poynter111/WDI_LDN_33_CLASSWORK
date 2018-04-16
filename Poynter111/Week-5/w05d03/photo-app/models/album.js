@@ -6,7 +6,8 @@ const albumSchema = new mongoose.Schema({
   location: String,
   year: Date,
   photos: [{type: mongoose.Schema.ObjectId, ref: 'Photo'}],
-  rating: {type: Number, min: 1, max: 5, default: 3}
+  rating: {type: Number, min: 1, max: 5, default: 3},
+  user: {type: mongoose.Schema.ObjectId, ref: 'User'}
 });
 
 module.exports = mongoose.model('Album', albumSchema);
