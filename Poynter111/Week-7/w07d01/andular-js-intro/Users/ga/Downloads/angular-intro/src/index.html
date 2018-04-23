@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" ng-app='angularIntro'>
+  <head>
+    <meta charset="utf-8">
+    <title>Angular Intro Lesson</title>
+    <link href="https://fonts.googleapis.com/css?family=Gugi" rel="stylesheet">
+  </head>
+  <body>
+    <div class="site-wrap">
+    <h1 class="title">The Metropolitan Museum of Art</h1>
+    <div class="wrap" ng-controller='MainCtrl as main'>
+      <h1>{{ main.headers.title }}</h1>
+      <div class="img"><img ng-src="{{ main.image }}" alt=""></div>
+      <h3>{{ main.headers.exhibitTitle }}</h3>
+      <h3>{{ main.headers.by }}</h3>
+    </div>
+    <div class="wrap" ng-controller='genInfoCtrl as genInfo'>
+      <h1>{{ genInfo.headers.info }}</h1>
+      <h3>{{ genInfo.headers.hours }}</h3>
+      <ul>
+        <li ng-repeat='day in genInfo.weekdays'>
+          <strong>{{ day.name }}</strong> {{ day.time }}
+        </li>
+      </ul>
+      <h3>{{ genInfo.headers.suggested }}</h3>
+      <ul>
+        <li ng-repeat='admission in genInfo.admissions'>
+          <strong>{{ admission.age }}</strong> {{ admission.price }}
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" ng-controller='donerCtrl as doner'>
+      {{doner.message}}
+    </div>
+  </div>
+  </body>
+</html>

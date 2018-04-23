@@ -1,0 +1,18 @@
+body{
+  background-color: white;
+  font-family: 'Gugi', cursive;
+  margin: 0 auto;
+  max-width: 960px;
+  .title{
+    text-align: center;
+  }
+  .site-wrap{
+    .wrap{
+      border-top: 1px solid grey;
+      margin-top: 10px;
+      img{
+        width: 100%;
+      }
+    }
+  }
+}
