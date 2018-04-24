@@ -1,0 +1,8 @@
+<h1>Wines Index Page</h1>
+
+<div ng-repeat=' wine in winesIndex.all'>
+<h2>{{ wine.brand }}</h2>
+<img ng-src="{{ wine.image }}" alt="">
+<h3>{{ wine.region }} - {{ wine.country }}</h3>
+<h4>{{ wine.vintage }}</h4>
+</div>
