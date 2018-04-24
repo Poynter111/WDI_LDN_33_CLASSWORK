@@ -4,11 +4,35 @@
     <meta charset="utf-8">
     <title>Winos</title>
   </head>
-  <body>
-    <nav>
-      <a ui-sref="home">Winos</a>
-      <a ui-sref="winesIndex">All the wines</a>
+  <body ng-controller='MainCtrl as main'>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+<!-- Nav Bar branding  -->
+      <div class="navbar-brand">
+        <a class="navbar-item" ui-sref="home">
+          <img src="./assets/winoS.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" ng-click="main.toggleNav()" ng-class="{ 'is-active': main.navBarIsOpen }">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+<!-- Nav bar branding end -->
+<!-- Nav bar items -->
+      <div class="navbar-menu" ng-class="{ 'is-active': main.navBarIsOpen }">
+        <div class="navbar-end">
+          <a class="navbar-item" ui-sref='winesIndex'>
+            All the wines
+          </a>
+        </div>
+      </div>
+<!-- Nav bar items end-->
     </nav>
-    <ui-view></ui-view>
+<!-- main body start -->
+    <ui-view ng-if="main.isHome"></ui-view>
+    <section class="section" ng-if="!main.isHome">
+      <div class="container" ui-view></div>
+    </section>
+<!-- main body end -->
   </body>
 </html>

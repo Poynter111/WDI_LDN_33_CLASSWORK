@@ -4,12 +4,18 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server"
+    "start:client": "webpack-dev-server",
+    "start:server": "nodemon",
+    "seed": "node db/seeds"
   },
   "dependencies": {
     "@uirouter/angularjs": "^1.0.15",
     "angular": "^1.6.0",
-    "bulma": "^0.7.1"
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "bulma": "^0.7.1",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.16"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

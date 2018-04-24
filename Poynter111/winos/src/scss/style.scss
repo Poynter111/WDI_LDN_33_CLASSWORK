@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Gugi');
+
+@import '~bulma/sass/utilities/initial-variables';
+
+$primary: #87017a;
+$family-primary: 'Gugi';
+
+@import '~bulma';
+
+.card-image{
+  height: 300px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.card-content{
+  height: 150px;
+}
+// Media querry for tablet and phones
+@media screen and (max-width: $tablet - 1px){
+  .card-content{
+    height: auto;
+  }
+}
