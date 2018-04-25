@@ -1,9 +1,9 @@
-WinesIndexCtrl.$inject = ['$http'];
+WinesIndexCtrl.$inject = ['Wine'];
 
-function WinesIndexCtrl($http) {
+function WinesIndexCtrl(Wine) {
   this.all = [];
 
-  $http.get('/api/wines')
+  Wine.find()
     .then(res => this.all = res.data);
 }
 

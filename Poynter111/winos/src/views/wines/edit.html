@@ -1,0 +1,28 @@
+<form ng-submit="winesEdit.handleUpdate()">
+  <div class="field">
+    <label for="grape">Grape</label>
+    <input class="input" placeholder="Grape" name="grape" ng-model="winesEdit.wine.grape" />
+  </div>
+  <div class="field">
+    <label for="brand">Brand</label>
+    <input class="input" placeholder="Brand" name="brand" ng-model="winesEdit.wine.brand" />
+  </div>
+  <div class="field">
+    <label for="vintage">Vintage</label>
+    <input class="input" placeholder="Vintage" name="vintage" ng-model="winesEdit.wine.vintage" />
+  </div>
+  <div class="field">
+    <label for="region">Region</label>
+    <input class="input" placeholder="Region" name="region" ng-model="winesEdit.wine.region" />
+  </div>
+  <div class="field">
+    <label for="country">Country</label>
+    <input class="input" placeholder="Country" name="country" ng-model="winesEdit.wine.country" />
+  </div>
+  <div class="field">
+    <label for="image">Image</label>
+    <input class="input" placeholder="Image" name="image" ng-model="winesEdit.wine.image" />
+  </div>
+
+  <button class="button is-primary">Submit</button>
+</form>
