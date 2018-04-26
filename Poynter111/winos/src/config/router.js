@@ -8,7 +8,6 @@ function secureState($q, $auth, $state) {
   });
 }
 
-
 Router.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 function Router($stateProvider, $urlRouterProvider) {
