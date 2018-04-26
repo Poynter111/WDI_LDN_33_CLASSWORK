@@ -22,9 +22,10 @@
       <div class="navbar-menu" ng-class="{ 'is-active': main.navBarIsOpen }">
         <div class="navbar-end">
           <a class="navbar-item" ui-sref='winesIndex'>All the wines</a>
-          <a class="navbar-item" ui-sref='winesNew'>Add New Wine</a>
-          <a class="navbar-item" ui-sref='register'>Register</a>
-          <a class="navbar-item" ui-sref='login'>Login</a>
+          <a class="navbar-item" ui-sref='winesNew' ng-if = "main.isAuthenticated()">Add New Wine</a>
+          <a class="navbar-item" ng-click="main.logout()" ng-if = "main.isAuthenticated()">Logout</a>
+          <a class="navbar-item" ui-sref='register' ng-if = "!main.isAuthenticated()">Register</a>
+          <a class="navbar-item" ui-sref='login' ng-if = "!main.isAuthenticated()">Login</a>
         </div>
       </div>
 <!-- Nav bar items end-->

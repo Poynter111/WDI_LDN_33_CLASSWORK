@@ -13,6 +13,7 @@ import WinesNewCtrl from './controllers/wines/new';
 import WinesShowCtrl from './controllers/wines/show';
 import WinesEditCtrl from './controllers/wines/edit';
 import LoginCtrl from './controllers/auth/login';
+import RegisterCtrl from './controllers/auth/register';
 //Models
 import Wine from './models/wine';
 
@@ -25,4 +26,5 @@ angular.module('winos', ['ui.router', 'satellizer'])
   .controller('WinesShowCtrl', WinesShowCtrl)
   .controller('WinesEditCtrl', WinesEditCtrl)
   .controller('LoginCtrl', LoginCtrl)
+  .controller('RegisterCtrl', RegisterCtrl)
   .service('Wine', Wine);

@@ -1,3 +1,14 @@
+secureState.$inject = ['$q', '$auth', '$state'];
+
+function secureState($q, $auth, $state) {
+  return new $q((resolve) => {
+    if($auth.isAuthenticated()) return resolve();
+
+    $state.go('login');
+  });
+}
+
+
 Router.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 function Router($stateProvider, $urlRouterProvider) {
@@ -14,7 +25,8 @@ function Router($stateProvider, $urlRouterProvider) {
     .state('winesNew', {
       url: '/wines/new',
       templateUrl: 'views/wines/new.html',
-      controller: 'WinesNewCtrl as winesNew'
+      controller: 'WinesNewCtrl as winesNew',
+      resolve: { secureState }
     })
     .state('winesShow',{
       url: '/wines/:id',
@@ -24,12 +36,18 @@ function Router($stateProvider, $urlRouterProvider) {
     .state('winesEdit',{
       url: '/wines/:id/edit',
       templateUrl: 'views/wines/edit.html',
-      controller: 'WinesEditCtrl as winesEdit'
+      controller: 'WinesEditCtrl as winesEdit',
+      resolve: { secureState }
     })
     .state('login',{
       url: '/login',
       templateUrl: 'views/auth/login.html',
       controller: 'LoginCtrl as login'
+    })
+    .state('register',{
+      url: '/register',
+      templateUrl: 'views/auth/register.html',
+      controller: 'RegisterCtrl as register'
     });
 
   $urlRouterProvider.otherwise('/');
