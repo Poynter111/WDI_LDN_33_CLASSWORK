@@ -20,6 +20,7 @@ function winesShow(req, res, next){
 }
 
 function winesCreate(req, res, next){
+  req.body.createdBy = req.currentUser;
   Wine
     .create(req.body)
     .then((wine) => res.status(201).json(wine))

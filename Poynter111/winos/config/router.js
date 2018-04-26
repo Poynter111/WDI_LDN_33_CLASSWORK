@@ -1,13 +1,19 @@
 const router = require('express').Router();
 const wines = require('../controllers/wines');
+const auth = require('../controllers/auth');
+const secureRoute = require('../lib/secureRoute');
+
 
 router.route('/wines')
   .get(wines.index)
-  .post(wines.create);
+  .post(secureRoute, wines.create);
 
 router.route('/wines/:id')
   .get(wines.show)
-  .put(wines.update)
-  .delete(wines.delete);
+  .put(secureRoute, wines.update)
+  .delete(secureRoute, wines.delete);
+
+router.post('/register', auth.register);
+router.post('/login', auth.login);
 
 module.exports = router;

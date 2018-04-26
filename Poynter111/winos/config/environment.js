@@ -2,4 +2,6 @@ const port = 4000;
 
 const dbURI = 'mongodb://localhost/winos';
 
-module.exports = { port, dbURI };
+const secret = 'G6^sk*/>alexiscool';
+
+module.exports = { port, dbURI, secret };

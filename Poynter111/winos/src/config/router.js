@@ -25,6 +25,11 @@ function Router($stateProvider, $urlRouterProvider) {
       url: '/wines/:id/edit',
       templateUrl: 'views/wines/edit.html',
       controller: 'WinesEditCtrl as winesEdit'
+    })
+    .state('login',{
+      url: '/login',
+      templateUrl: 'views/auth/login.html',
+      controller: 'LoginCtrl as login'
     });
 
   $urlRouterProvider.otherwise('/');
