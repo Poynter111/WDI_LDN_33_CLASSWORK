@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="aldgateGrind">
+<head>
+  <meta charset="utf-8">
+  <title>Aldgate Grind</title>
+</head>
+<body>
+
+  <main ng-controller="MainCtrl as main">
+    <h1>Aldgate Grind</h1>
+
+    <div class="columns">
+      <div class="column">
+        <h2>Drinks</h2>
+        <table>
+          <tbody>
+            <tr ng-repeat="drink in main.drinks">
+              <td>{{ drink.name }}</td>
+              <td>{{ drink.price | currency: '£' }}</td>
+              <td><button ng-click="main.addToOrder(drink)" ng-disabled="!main.canSelectItem(drink)">Add to order</button></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Extras</h2>
+        <table>
+          <tbody>
+            <tr ng-repeat="extra in main.extras">
+              <td>{{ extra.name }}</td>
+              <td>{{ extra.price | currency: '£' }}</td>
+              <td><button ng-click="main.addToOrder(extra)" ng-disabled="!main.canSelectItem(extra)">Add to order</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="column is-one-third">
+        <h2>Your Selection</h2>
+        <table>
+          <tbody>
+            <tr ng-repeat="item in main.order track by $index">
+              <td>{{ item.name }}</td>
+              <td>{{ item.price | currency: '£' }}</td>
+              <td><button ng-click="main.removeItem(item)">&times;</button></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Total: {{ main.getTotal() | currency: '£' }}</h3>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
