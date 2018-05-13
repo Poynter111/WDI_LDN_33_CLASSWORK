@@ -1,27 +1,52 @@
-<form ng-submit="winesNew.handleCreate()">
+
+
+
+<form name="winesNew.form" ng-submit="winesNew.handleCreate()" novalidate>
   <div class="field">
     <label for="grape">Grape</label>
-    <input class="input" placeholder="Grape" name="grape" ng-model="winesNew.data.grape" />
+    <input class="input" placeholder="Grape" name="grape" ng-model="winesNew.data.grape" required ng-class="{ 'is-danger': winesNew.isDanger('grape') }" />
+    <div ng-if="winesNew.form.grape.$touched || winesNew.form.$submitted">
+      <small ng-if="winesNew.form.grape.$error.required">This feild is required</small>
+    </div>
   </div>
   <div class="field">
     <label for="brand">Brand</label>
-    <input class="input" placeholder="Brand" name="brand" ng-model="winesNew.data.brand" />
+    <input class="input" placeholder="Brand" name="brand" ng-model="winesNew.data.brand" required ng-class="{ 'is-danger': winesNew.isDanger('brand') }" />
+    <div ng-if="winesNew.form.brand.$touched || winesNew.form.$submitted">
+      <small ng-if="winesNew.form.brand.$error.required">This feild is required</small>
+    </div>
   </div>
   <div class="field">
     <label for="vintage">Vintage</label>
-    <input class="input" placeholder="Vintage" name="vintage" ng-model="winesNew.data.vintage" />
+    <input class="input" placeholder="Vintage" name="vintage" ng-model="winesNew.data.vintage" required ng-class="{ 'is-danger': winesNew.isDanger('vintage') }" />
+    <div ng-if="winesNew.form.vintage.$touched || winesNew.form.$submitted">
+      <small ng-if="winesNew.form.vintage.$error.required">This feild is required</small>
+    </div>
   </div>
   <div class="field">
     <label for="region">Region</label>
-    <input class="input" placeholder="Region" name="region" ng-model="winesNew.data.region" />
+    <input class="input" placeholder="Region" name="region" ng-model="winesNew.data.region" required ng-class="{ 'is-danger': winesNew.isDanger('region') }" />
+    <div ng-if="winesNew.form.region.$touched || winesNew.form.$submitted">
+      <small ng-if="winesNew.form.region.$error.required">This feild is required</small>
+    </div>
+  </div>
+  <div class="field">
+    <label for="location">Location</label>
+    <input class="input" placeholder="Location" name="location" g-autocomplete handle-change="winesNew.updateLocation(location)" />
   </div>
   <div class="field">
     <label for="country">Country</label>
-    <input class="input" placeholder="Country" name="country" ng-model="winesNew.data.country" />
+    <input class="input" placeholder="Country" name="country" ng-model="winesNew.data.country" required ng-class="{ 'is-danger': winesNew.isDanger('country') }" />
+    <div ng-if="winesNew.form.country.$touched || winesNew.form.$submitted">
+      <small ng-if="winesNew.form.country.$error.required">This feild is required</small>
+    </div>
   </div>
   <div class="field">
     <label for="image">Image</label>
-    <input class="input" placeholder="Image" name="image" ng-model="winesNew.data.image" />
+    <input class="input" placeholder="Image" name="image" ng-model="winesNew.data.image" required ng-class="{ 'is-danger': winesNew.isDanger('image') }" />
+    <div ng-if="winesNew.form.image.$touched || winesNew.form.$submitted">
+      <small ng-if="winesNew.form.image.$error.required">This feild is required</small>
+    </div>
   </div>
 
   <button class="button is-primary">Submit</button>

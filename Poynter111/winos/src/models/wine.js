@@ -20,12 +20,21 @@ function Wine($http){
     return $http.put(`/api/wines/${id}`, data);
   }
 
+  function commentCreate(wineId, data){
+    return $http.post(`/api/wines/${wineId}/comments`, data);
+  }
+
+  function commentDelete(wineId, commentId){
+    return $http.delete(`/api/wines/${wineId}/comments/${commentId}`);
+  }
 
   this.find = find;
   this.findById = findById;
   this.removeById = removeById;
   this.create = create;
   this.updateById = updateById;
+  this.commentCreate = commentCreate;
+  this.commentDelete = commentDelete;
 }
 
 export default Wine;

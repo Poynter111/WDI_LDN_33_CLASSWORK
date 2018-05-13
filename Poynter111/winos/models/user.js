@@ -5,7 +5,8 @@ mongoose.Promise = require('bluebird');
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true},
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
+  password: { type: String },
+  githubId: { type: Number, unique: true }
 });
 
 userSchema.plugin(require('mongoose-unique-validator'));
@@ -29,6 +30,9 @@ userSchema
 
 //Before (pre) any function 'saves' something, run this function to encrypt the password before it is stored:
 userSchema.pre('validate', function checkPassword(next){
+  if(!this.password && !this.githubId) {
+    this.invalidate('password', 'password is required');
+  }
   if(this.isModified('password') && this._passwordConfirmation !== this.password){
     this.invalidate('passwordConfirmation', 'does not match');
   }

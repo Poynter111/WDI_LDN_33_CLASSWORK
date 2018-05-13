@@ -16,6 +16,9 @@ import LoginCtrl from './controllers/auth/login';
 import RegisterCtrl from './controllers/auth/register';
 //Models
 import Wine from './models/wine';
+//Directives
+import gMap from './directives/gMap';
+import gAutocomplete from './directives/gAutocomplete';
 
 angular.module('winos', ['ui.router', 'satellizer'])
   .config(Router)
@@ -27,4 +30,6 @@ angular.module('winos', ['ui.router', 'satellizer'])
   .controller('WinesEditCtrl', WinesEditCtrl)
   .controller('LoginCtrl', LoginCtrl)
   .controller('RegisterCtrl', RegisterCtrl)
-  .service('Wine', Wine);
+  .service('Wine', Wine)
+  .directive('gMap', gMap)
+  .directive('gAutocomplete', gAutocomplete);

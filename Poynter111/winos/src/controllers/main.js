@@ -2,8 +2,8 @@ MainCtrl.$inject = ['$transitions', '$auth', '$state'];
 
 
 function MainCtrl($transitions, $auth, $state){
-  this.navBarIsOpen = false;
   this.isHome = true;
+  this.navBarIsOpen = false;
   this.isAuthenticated = $auth.isAuthenticated;
 
   $transitions.onSuccess({}, (transition) => {

@@ -1,0 +1,9 @@
+<a ui-sref="wondersIndex">
+  <div>
+    <p>{{ wonderShow.wonder.name }}</p>
+    <p>{{ wonderShow.wonder.country }}</p>
+    <p>{{ wonderShow.wonder.location }}</p>
+    <img src="{{ wonderShow.wonder.image }}" alt="">
+    <div class="map" g-map center="wonderShow.wonder.location">GOOGLE MAP GOES HERE</div>
+  </div>
+</a>

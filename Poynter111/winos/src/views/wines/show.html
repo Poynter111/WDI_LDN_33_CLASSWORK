@@ -5,9 +5,46 @@
       <div class="media-content">
         <p class="title is-4">{{ winesShow.wine.brand }} - {{ winesShow.wine.vintage }}</p>
         <p class="subtitle is-6">{{ winesShow.wine.region }} - {{ winesShow.wine.country }}</p>
+        <p>{{ winesShow.forecast.summary }} - {{ winesShow.forecast.temperature}}ºC</p>
+        <div class="map" g-map center="winesShow.wine.location">GOOGLE MAP GOES HERE</div>
       </div>
     </div>
     <a ui-sref="winesEdit({ id: winesShow.wine._id })" class="button is-primary">Edit</a>
     <button ng-click="winesShow.handleDelete()" class="button is-primary">Delete</button>
+
+    <hr />
+
+    <div class="comments">
+      <div class="media" ng-repeat="comment in winesShow.wine.comments">
+        <div class="media-content">
+          <p class="title is-5">{{ comment.createdBy.username }}</p>
+          <p class="subtitle is-6">{{ comment.content }}</p>
+          <p> {{ '⭐️'.repeat(comment.rating) }} </p>
+          <small>{{ comment.createdAtRelative }}</small>
+          <button ng-click="winesShow.handleCommentDelete(comment)" class="button is-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <form ng-submit="winesShow.handleCommentCreate()">
+      <div class="field">
+        <label for="content">Comment</label>
+        <textarea class="textarea" ng-model="winesShow.data.content" placeholder="Comment"></textarea>
+      </div>
+      <div class="field">
+        <label>Rating</label>
+        <div class="select">
+          <select ng-model="winesShow.data.rating">
+            <option value="" selected disabled>Please choose</option>
+            <option value="1">⭐️</option>
+            <option value="2">⭐️⭐️</option>
+            <option value="3">⭐️⭐️⭐️</option>
+            <option value="4">⭐️⭐️⭐️⭐️</option>
+            <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
+          </select>
+        </div>
+      </div>
+      <button class="button">Submit</button>
+    </form>
   </div>
 </div>

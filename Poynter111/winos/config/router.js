@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const wines = require('../controllers/wines');
 const auth = require('../controllers/auth');
+const darksky = require('../controllers/darksky');
+const oauth = require('../controllers/oauth');
 const secureRoute = require('../lib/secureRoute');
 
 router.route('/wines')
@@ -12,7 +14,14 @@ router.route('/wines/:id')
   .put(secureRoute, wines.update)
   .delete(secureRoute, wines.delete);
 
+router.post('/wines/:id/comments', secureRoute, wines.commentCreate);
+router.delete('/wines/:id/comments/:commentId', secureRoute, wines.commentDelete);
+
 router.post('/register', auth.register);
 router.post('/login', auth.login);
+
+router.get('/forecast', darksky.forecast);
+
+router.post('/github', oauth.github);
 
 module.exports = router;

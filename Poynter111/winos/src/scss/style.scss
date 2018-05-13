@@ -15,7 +15,13 @@ $family-primary: 'Gugi';
 }
 
 .card-content{
-  height: 150px;
+  min-height: 150px;
+}
+.map {
+  height: 300px;
+}
+label{
+  display: block;
 }
 // Media querry for tablet and phones
 @media screen and (max-width: $tablet - 1px){

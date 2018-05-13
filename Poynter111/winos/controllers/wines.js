@@ -11,6 +11,7 @@ function winesIndex(req, res, next){
 function winesShow(req, res, next){
   Wine
     .findById(req.params.id)
+    .populate('comments.createdBy')
     .exec()
     .then(wine => {
       if(!wine) return res.sendStatus(404);
@@ -30,6 +31,7 @@ function winesCreate(req, res, next){
 function winesUpdate(req, res, next){
   Wine
     .findById(req.params.id)
+    .exec()
     .then(wine => {
       if(!wine) return res.sendStatus(404);
       return Object.assign(wine, req.body);
@@ -42,6 +44,7 @@ function winesUpdate(req, res, next){
 function winesDelete(req, res, next){
   Wine
     .findById(req.params.id)
+    .exec()
     .then(wine => {
       if(!wine) return res.sendStatus(404);
       return wine.remove();
@@ -50,10 +53,38 @@ function winesDelete(req, res, next){
     .catch(next);
 }
 
+function winesCommentCreate(req, res, next){
+  req.body.createdBy = req.currentUser;
+  Wine.findById(req.params.id)
+    .exec()
+    .then(wine => {
+      wine.comments.push(req.body);
+      return wine.save();
+    })
+    .then(wine => res.json(wine))
+    .catch(next);
+}
+function winesCommentDelete(req, res, next){
+  Wine.findById(req.params.id)
+    .exec()
+    .then(wine => {
+      const comment = wine.comments.id(req.params.commentId);
+      if(!comment.createdBy.equals(req.currentUser._id)) {
+        return res.status(401).json({ message: 'Unauthorized' });
+      }
+      comment.remove();
+      return wine.save();
+    })
+    .then(wine => res.json(wine))
+    .catch(next);
+}
+
 module.exports = {
   index: winesIndex,
   show: winesShow,
   create: winesCreate,
   update: winesUpdate,
-  delete: winesDelete
+  delete: winesDelete,
+  commentCreate: winesCommentCreate,
+  commentDelete: winesCommentDelete
 };

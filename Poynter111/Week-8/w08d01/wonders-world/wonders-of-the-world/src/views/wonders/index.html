@@ -1,0 +1,9 @@
+<div ng-repeat="wonder in wondersIndex.all">
+  <a ui-sref="wonderShow ({ id: wonder._id })">
+    <div>
+      <p>{{ wonder.name }}</p>
+      <p>{{ wonder.country }}</p>
+      <img src="{{ wonder.image }}" alt="">
+    </div>
+  </a>
+</div>
