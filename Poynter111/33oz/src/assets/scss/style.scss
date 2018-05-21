@@ -1,7 +1,43 @@
 .card{
   margin-bottom: 20px;
+  }
+  .card-image{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 300px;
+  }
+.hero-iamge{
+  @extend .card-image;
+  height: 600px;
 }
+
 .wrap{
   width: 400px;
   margin: auto;
+}
+
+.navbar{
+  background-color: lightGrey;
+}
+.price{
+  font-size: 40px;
+  margin: 20px 0;
+}
+
+.map{
+  height: 200px;
+  margin-bottom: 20px;
+  &.burger-index{
+    height: 75vh;
+  }
+}
+
+.showPageParent{
+  position: relative;
+}
+
+.buttonsShow{
+  position: absolute;
+  bottom: 0px;
 }

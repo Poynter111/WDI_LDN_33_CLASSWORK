@@ -40,3 +40,17 @@ ReactDOM.render(
   <App />,
   document.querySelector('#root')
 );
+
+
+<main>
+        <h1 className="title">Flags of the world</h1>
+        {!this.state.countries && <p>Loading...</p>}
+        {this.state.countries && <ul>
+          {this.state.countries.map(country =>
+            <li key={country.alpha3Code}>
+              <img src={country.flag} width="200" />
+              <p>{country.name}</p>
+            </li>
+          )}
+        </ul>}
+      </main>

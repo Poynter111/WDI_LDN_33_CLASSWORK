@@ -1,0 +1,19 @@
+const numbers = [4, 2, 10, 8, 6, 12];
+
+numbers.sort((a, b) => {
+  if (a > b) return 5000;
+  if (a < b) return -Math.PI;
+  return 0;
+});
+
+numbers.sort((a,b) => a - b);
+
+numbers.sort((a,b) => b - a);
+
+moreFish.sort((a,b) => {
+  if(a.toLowerCase() > b.toLowerCase()) return 1;
+  if(a.toLowerCase() < b.toLowerCase()) return -1;
+  return 0;
+});
+
+numbers.filter(x => x < 8)

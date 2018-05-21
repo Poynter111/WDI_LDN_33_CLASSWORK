@@ -11,7 +11,7 @@ mongoose.connect(dbURI, (err, db) => {
   Burger.create([{
     name: 'Holy Smokes',
     restaurant: 'Burger Priest',
-    price: 2,
+    price: 1,
     address: '3397 Yonge St. Toronto, ON, Canada M4N 2M7',
     location: {
       lat: 43.6666944,
@@ -36,19 +36,20 @@ mongoose.connect(dbURI, (err, db) => {
     address: '9, Avant Garde Richmix Square, Cygnet St, London E1',
     location: {
       lat: 51.5240377,
-      long: -0.0727817
+      lng: -0.0727817
     },
     suitableFor: ['vegetarian', 'vegan', 'dairy-free'],
     price: 2,
     description: 'Aubergine, caramelised red onion and Tabasco Chipotle chickpea patty with pickled red cabbage, gherkins, cheese and our house cumin mayo.',
     image: 'https://static1.squarespace.com/static/5794c448bebafb2f11804d9e/t/5a1204d871c10ba553380f93/1511130360834/theAUBURGER.jpg?format=750w'
   }, {
-    name: 'Five Guys Bacon Burger',
+    name: 'Bacon Burger',
+    restaurant: 'Five Guys',
     address: '9/11 Villiers St.Charing Cross London WC2N 6NA',
     location: {
       lat: 51.508217,
       lng: -0.123829},
-    price: 2,
+    price: 3,
     description: 'regular two-patty burger, layered with four pieces of crispy, sweet apple-wood smoked bacon.',
     image: 'https://c1.staticflickr.com/8/7154/6711547597_6649b8ed97_b.jpg'
   }])
