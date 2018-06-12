@@ -41,8 +41,6 @@ wineSchema.virtual('avgRating')
     return this.comments.reduce((sum, comment) => sum + comment.rating, 0) / this.comments.length;
   });
 
-
-
 wineSchema.set('toJSON', {
   virtuals: true
 });

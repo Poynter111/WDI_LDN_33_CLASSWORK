@@ -18,3 +18,6 @@ app.get('/*', (req, res) => res.sendFile(`${__dirname}/public/index.html`));
 app.use(errorHandler);
 
 app.listen(4000, () => console.log(`We're up and running on port ${port}`));
+
+
+module.exports = app;

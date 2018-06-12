@@ -5,7 +5,6 @@ const { dbURI } = require('../config/environment');
 const Burger = require('../models/burger');
 
 mongoose.connect(dbURI, (err, db) => {
-  console.log(err);
   db.dropDatabase();
 
   Burger.create([{

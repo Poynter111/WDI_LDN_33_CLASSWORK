@@ -1,14 +1,18 @@
 import React from 'react';
 import BurgerForm from './Form';
 import axios from 'axios';
+import Auth from '../../lib/Auth';
 
 
 class BurgersNew extends React.Component {
 
-  state = {};
+  state = {
+    errors: {}
+  };
 
   handleChange = ({target: { name, value} }) => {
-    this.setState({ [name]: value });
+    const errors = { ...this.state.errors, [name]: ''};
+    this.setState({errors, [name]: value });
   }
 
   handlePlaceChange = ({ formatted_address, geometry: { location }}) => {
@@ -17,8 +21,11 @@ class BurgersNew extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    axios.post('/api/burgers', this.state)
-      .then(() => this.props.history.push('/burgers'));
+    axios.post('/api/burgers', this.state, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}`}
+    })
+      .then(() => this.props.history.push('/burgers'))
+      .catch(err => this.setState({ errors: err.response.data.errors }));
   }
 
   render(){
@@ -27,6 +34,7 @@ class BurgersNew extends React.Component {
       handleChange={this.handleChange}
       handleSubmit={this.handleSubmit}
       handlePlaceChange={this.handlePlaceChange}
+      errors={this.state.errors}
     />;
   }
 

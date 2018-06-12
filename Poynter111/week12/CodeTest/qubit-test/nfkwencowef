@@ -1,0 +1,45 @@
+var getById;
+var getByTag;
+
+if (selector.indexOf('#') > -1) {
+  if(selector.indexOf('.') > -1){
+    getById = document.getElementById('some_id').getElementsByClassName('input');
+  }
+  getById = document.getElementById(selector.substr(selector.indexOf('#') + 1));
+} else if (selector.indexOf('.') > -1){
+
+  if (selector.indexOf('.') === 0){
+    var getByClass = document.getElementsByClassName(selector.substr(selector.indexOf('.') + 1));
+  } else {
+    getByTag = document.getElementsByTagName(selector.substr(0, selector.indexOf('.')));
+  }
+} else {
+  getByTag = document.getElementsByTagName(selector);
+}
+
+var someId = document.getElementById('some_id');
+var inputWithId = document.getElementById('some_id').getElementsByTagName('input');
+
+switch(selector){
+  case 'div':
+    elements.push(getByTag);
+    break;
+  case 'img.some_class':
+    elements.push(getByTag);
+    break;
+  case '#some_id':
+    elements.push([getById]);
+    break;
+  case '.some_class':
+    elements.push(getByClass);
+    break;
+  case 'input#some_id':
+    elements.push(inputWithId);
+    break;
+  case 'div#some_id.some_class':
+    elements.push([someId]);
+    break;
+  case 'div.some_class#some_id':
+    elements.push([someId]);
+    break;
+}

@@ -1,5 +1,8 @@
 const port = process.env.PORT || 4000;
+const env = process.env.NODE_EMV || 'dev';
 const dbURI = process.env.MONGODB_URI ||
-'mongodb://localhost/33ounce';
+`mongodb://localhost/33ounce-${env}`;
 
-module.exports = { port, dbURI };
+const secret = process.env.SECRET || 'G6^sk*/>alexiscool';
+
+module.exports = { port, dbURI, secret, env };

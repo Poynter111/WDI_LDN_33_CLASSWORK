@@ -8,7 +8,6 @@ class Map extends React.Component {
     this.markers = [];
   }
   componentDidMount(){
-    console.log(this.mapDiv);
     this.map = new google.maps.Map(this.mapDiv, {
       center: this.props.center,
       zoom: 14,
@@ -18,7 +17,6 @@ class Map extends React.Component {
     this.marker = new google.maps.Marker({
       position: this.map.getCenter(),
       map: this.map,
-      animation: google.maps.Animation.DROP,
       label: '🍔'
     });
     this.generateMarkers();

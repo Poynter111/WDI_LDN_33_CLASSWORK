@@ -1,11 +1,25 @@
-function errorHandler(err, req, res, next) { // eslint-disable-line
-  console.log(err);
+const { env } = require('../config/environment');
 
+function errorHandler(err, req, res, next) {
+  if(err.message === 'Unauthorized') {
+    return res.status(401).json({ message: 'Token expired'});
+  }
+  if(err.name === 'TokenExpired') {
+    return res.status(401).json({ message: 'Token expired'});
+  }
   if(err.name === 'ValidationError') {
-    return res.status(422).json({ message: err.toString() });
+
+    const errors = {};
+    for(const field in err.errors) {
+      errors[field] = err.errors[field].message;
+    }
+    err.errors = errors;
+
+    return res.status(422).json({ message: 'Unprocessable Entity', errors });
   }
 
-  res.status(500).json({ message: 'Internal Server Error'});
+  res.status(500).json({ message: 'Internal Server Error' });
+  if(env !== 'test') next(err);
 }
 
 module.exports = errorHandler;
